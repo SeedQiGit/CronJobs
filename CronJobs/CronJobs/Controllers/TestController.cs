@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace CronJobs.Controllers
 {
-    public class TestController
+    public class TestController:BaseController
     {
         private readonly IUserRepository _userRepository;
 
