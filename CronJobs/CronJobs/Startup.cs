@@ -1,29 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CronJobs.Infrastructure.Extensions;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 
 namespace CronJobs
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region ≤÷¥¢∫Õserviceµ»“¿¿µ◊¢»Î
+
+            services.RegisterAssembly("CronJobs", Lifecycle.Scoped);
+            //services.AddScoped(typeof(IRepositoryBase<>), typeof(EfRepositoryBase<>));
+
+            //services.AddScoped<DbContext, bihu_apicoreContext>();
+
+            MongoClient client = new MongoClient(SettingManager.GetValue("MongoDB:ConnectionString"));
+            services.AddSingleton(client);
+         
+            //services.AddScoped<IRepository<User>, UserRepository>();
+
+
+            #endregion
+
             services.AddControllers();
         }
 
@@ -34,6 +39,8 @@ namespace CronJobs
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
