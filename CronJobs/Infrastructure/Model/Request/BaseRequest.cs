@@ -1,4 +1,4 @@
-﻿namespace CronJobs.Data.Request
+﻿namespace Infrastructure.Model.Request
 {
     public class BaseRequest
     {
