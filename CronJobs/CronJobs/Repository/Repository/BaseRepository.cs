@@ -87,9 +87,29 @@ namespace CronJobs.Repository.Repository
         #endregion
 
         #region 更新
-        public Task UpdateOneAsync(T addData)
+
+        /// <summary>
+        /// 单独更新
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <param name="update">执行更新</param>
+        /// <returns></returns>
+        public async Task<UpdateResult> UpdateOneAsync(Expression<Func<T, bool>> filter,UpdateDefinition<T> update)
         {
-            throw new NotImplementedException();
+            //var update = Builders<T>.Update.Set("name", "asd");
+            return await Context.UpdateOneAsync(filter,update);
+        }
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <param name="update">执行更新</param>
+        /// <returns></returns>
+        public async Task<UpdateResult> UpdateManyAsync(Expression<Func<T, bool>> filter,UpdateDefinition<T> update)
+        {
+            //var update = Builders<T>.Update.Set("name", "asd");
+            return await Context.UpdateManyAsync(filter,update);
         }
 
         public async Task<ReplaceOneResult> ReplaceOneAsync(T t)

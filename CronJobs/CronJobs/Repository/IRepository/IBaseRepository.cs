@@ -60,11 +60,20 @@ namespace CronJobs.Repository.IRepository
         Task<ReplaceOneResult> ReplaceOneAsync(T t);
 
         /// <summary>
-        /// 修改一条完整的数据
+        /// 单独更新
         /// </summary>
-        /// <param name="addData">修改的数据</param>
+        /// <param name="filter">过滤</param>
+        /// <param name="update">执行更新</param>
         /// <returns></returns>
-        Task UpdateOneAsync(T addData);
+        Task<UpdateResult> UpdateOneAsync(Expression<Func<T, bool>> filter,UpdateDefinition<T> update);
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <param name="update">执行更新</param>
+        /// <returns></returns>
+        Task<UpdateResult> UpdateManyAsync(Expression<Func<T, bool>> filter,UpdateDefinition<T> update);
 
         #endregion
     

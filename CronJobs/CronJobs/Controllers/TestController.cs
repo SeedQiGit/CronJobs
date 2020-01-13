@@ -33,8 +33,13 @@ namespace CronJobs.Controllers
         public async Task<DeleteResult> Delete([FromBody]string id)
         {
              return await _userRepository.DeleteOneAsync(c=>c.Id==id);
-              
         }
 
+        
+        [HttpPost("Update")]
+        public async Task<DeleteResult> Update([FromBody]string id)
+        {
+            return await _userRepository.DeleteOneAsync(c=>c.Id==id);
+        }
     }
 }
