@@ -1,4 +1,5 @@
 ﻿using CronJobs.Data.Entity;
+using CronJobs.Repositories.Repository;
 using CronJobs.Repository.IRepository;
 using MongoDB.Driver;
 

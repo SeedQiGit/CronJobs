@@ -25,7 +25,7 @@ namespace Infrastructure.Model.Request
             set => _pageSize = value <= 0 ? SettingManager.GetValue<int>("PageSize") : value;
         }
 
-        public long Skip { get => (PageIndex - 1) * PageSize; }
+        public int Skip => (PageIndex - 1) * PageSize;
 
         public string LimitSql()
         {

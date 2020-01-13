@@ -1,14 +1,13 @@
-﻿using CronJobs.Repository.IRepository;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CronJobs.Data.Entity;
+using CronJobs.Repositories.IRepository;
 using Infrastructure.Extensions;
-using MongoDB.Bson;
+using MongoDB.Driver;
 
-namespace CronJobs.Repository.Repository
+namespace CronJobs.Repositories.Repository
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : IMongoDbEntity
     {
@@ -35,7 +34,6 @@ namespace CronJobs.Repository.Repository
 
         public async Task<List<T>> GetListAsync(int skip = 0, int count = 0)
         {
-            Expression<Func<T, bool>> ex;
             var result = await Context.Find(x => true)
                 .Skip(skip)
                 .Limit(count)
@@ -52,9 +50,9 @@ namespace CronJobs.Repository.Repository
             return result;
         }
 
-        public async Task<List<T>> GetListAsync(FilterDefinition<T> filter,int skip = 0, int count = 0)
+        public async Task<List<T>> GetListAsync(FilterDefinition<T> filter,int skip = 0, int count = 0,SortDefinition<T> sort=null)
         {
-            var result = await Context.Find(filter)
+            var result = await Context.Find(filter).Sort(sort)
                 .Skip(skip)
                 .Limit(count)
                 .ToListAsync();

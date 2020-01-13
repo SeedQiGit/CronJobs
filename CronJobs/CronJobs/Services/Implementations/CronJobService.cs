@@ -1,10 +1,11 @@
 ﻿using CronJobs.Data.Entity;
 using CronJobs.Data.Request;
-using CronJobs.Repository.IRepository;
+using CronJobs.Repositories.IRepository;
 using CronJobs.Services.Interfaces;
+using Infrastructure.Model.Response;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Infrastructure.Model.Response;
 
 namespace CronJobs.Services.Implementations
 {
@@ -17,13 +18,26 @@ namespace CronJobs.Services.Implementations
             _cronJobRepository = cronJobRepository;
         }
 
-        public async  Task<BaseResponse<List<CronJob>>> CronJobList(CronJobListRequest request)
+        public async Task<BaseResponse> CronJobList(CronJobListRequest request)
         {
+            var filterBuilder = Builders<CronJob>.Filter;
+            var filter = filterBuilder.Empty;
 
-            
-            return await _userRepository.GetListAsync();
+            if (!string.IsNullOrEmpty(request.Name))
+            {
+                filter=filter&filterBuilder.Eq("Name",request.Name);
+            }
 
-            return BaseResponse<List<CronJob>>.Ok(new List<CronJob>());
+            if (request.JobState!=0)
+            {
+                filter=filter&filterBuilder.Eq("JobState",request.JobState);
+            }
+
+            var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
+
+            var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
+
+            return BaseResponse<List<CronJob>>.Ok(list);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CronJobs.Data.Entity;
+using CronJobs.Repositories.IRepository;
 
 namespace CronJobs.Repository.IRepository
 {

@@ -1,11 +1,11 @@
-﻿using CronJobs.Data.Entity;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using CronJobs.Data.Entity;
+using MongoDB.Driver;
 
-namespace CronJobs.Repository.IRepository
+namespace CronJobs.Repositories.IRepository
 {
     public interface IBaseRepository<T> where T: IMongoDbEntity
     {
@@ -19,7 +19,7 @@ namespace CronJobs.Repository.IRepository
 
         Task<List<T>> GetListAsync(Expression<Func<T, bool>> ex,int skip = 0, int count = 0);
 
-        Task<List<T>> GetListAsync(FilterDefinition<T> filter,int skip = 0, int count = 0);
+        Task<List<T>> GetListAsync(FilterDefinition<T> filter,int skip = 0, int count = 0,SortDefinition<T> sort=null);
 
         /// <summary>
         /// 根据表达式获取一条数据

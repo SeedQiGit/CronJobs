@@ -5,7 +5,7 @@ namespace CronJobs.Data.Request
     public class CronJobListRequest:PageRequest
     {
         /// <summary>
-        /// 默认=0,暂停=1,删除=2
+        /// 不筛选=0  启用=1,暂停=2,删除=3
         /// </summary>           
         public int JobState{ get; set; }
 
@@ -22,6 +22,6 @@ namespace CronJobs.Data.Request
         /// <summary>
         ///  排序字段
         /// </summary>
-        public string OrderByField { get; set; }
+        public string OrderByField { get; set; }="Id";
     }
 }

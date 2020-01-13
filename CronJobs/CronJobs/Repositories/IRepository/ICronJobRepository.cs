@@ -1,6 +1,6 @@
 ﻿using CronJobs.Data.Entity;
 
-namespace CronJobs.Repository.IRepository
+namespace CronJobs.Repositories.IRepository
 {
     public interface ICronJobRepository: IBaseRepository<CronJob>
     {
