@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CronJobs</name>
+    </assembly>
+    <members>
+        <member name="P:CronJobs.Data.Entity.CronJob.Name">
+            <summary>
+            任务名称
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.Description">
+            <summary>
+            任务描述信息
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.Cron">
+            <summary>
+            运行周期表达式
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.IsDelete">
+            <summary>
+            是否删除  0未删除  1已删除
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.IsSuspend">
+            <summary>
+             是否暂停  0未暂停  1暂停
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.RequestUrl">
+            <summary>
+            任务请求得业务地址（目前只支持get请求）
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.CreateTime">
+            <summary>
+            创建时间
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Entity.CronJob.UpdateTime">
+            <summary>
+            更新时间
+            </summary>           
+        </member>
+        <member name="T:CronJobs.Data.Entity.User">
+            <summary>
+            User POCO
+            </summary>
+        </member>
+        <member name="T:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension">
+            <summary>
+            IServiceCollection扩展
+            </summary>
+        </member>
+        <member name="M:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,CronJobs.Infrastructure.Extensions.Lifecycle)">
+            <summary>
+            用DI批量注入接口程序集中对应的实现类。
+            <para>
+            需要注意的是，这里有如下约定：
+            IUserService --> UserService, IUserRepository --> UserRepository.
+            </para>
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,CronJobs.Infrastructure.Extensions.Lifecycle)">
+            <summary>
+            用DI批量注入接口程序集中对应的实现类。
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
+            <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CronJobs.Infrastructure.Extensions.Lifecycle">
+            <summary>
+            注入的生命周期
+            </summary>
+        </member>
+        <member name="M:CronJobs.Infrastructure.Extensions.RuntimeHelper.GetAllAssemblies">
+            <summary>
+            获取项目程序集，排除所有的系统程序集(Microsoft.***、System.***等)、Nuget下载包
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.GetListAsync(System.Int32,System.Int32)">
+            <summary>
+            获取所有数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据表达式获取一条数据
+            </summary>
+            <param name="ex">Expression</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.AddAsync(`0)">
+            <summary>
+            添加一个数据
+            </summary>
+            <param name="addData">添加的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="ex">Expression</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="ex">Expression</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+            <summary>
+            单独更新
+            </summary>
+            <param name="filter">过滤</param>
+            <param name="update">执行更新</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+            <summary>
+            批量更新
+            </summary>
+            <param name="filter">过滤</param>
+            <param name="update">执行更新</param>
+            <returns></returns>
+        </member>
+        <member name="F:CronJobs.Repository.Repository.BaseRepository`1.Context">
+            <summary>
+            文档
+            </summary>
+        </member>
+        <member name="F:CronJobs.Repository.Repository.BaseRepository`1.Datebase">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.#ctor(MongoDB.Driver.MongoClient)">
+            <summary>
+            构成函数
+            </summary>
+            <param name="mongoClient"></param>
+        </member>
+        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+            <summary>
+            单独更新
+            </summary>
+            <param name="filter">过滤</param>
+            <param name="update">执行更新</param>
+            <returns></returns>
+        </member>
+        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+            <summary>
+            批量更新
+            </summary>
+            <param name="filter">过滤</param>
+            <param name="update">执行更新</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

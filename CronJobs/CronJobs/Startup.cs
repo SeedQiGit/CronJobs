@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using CronJobs.Infrastructure.Extensions;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -10,24 +12,26 @@ namespace CronJobs
 {
     public class Startup
     {
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             #region 仓储和service等依赖注入
 
             services.RegisterAssembly("CronJobs", Lifecycle.Scoped);
-            //services.AddScoped(typeof(IRepositoryBase<>), typeof(EfRepositoryBase<>));
-
-            //services.AddScoped<DbContext, bihu_apicoreContext>();
-
+ 
             MongoClient client = new MongoClient(SettingManager.GetValue("MongoDB:ConnectionString"));
             services.AddSingleton(client);
-         
             //services.AddScoped<IRepository<User>, UserRepository>();
 
-
             #endregion
+
+            //// Register the Swagger generator, defining 1 or more Swagger documents
+            //services.AddSwaggerGen(c =>
+            //{swagger 对应3.1core的还在测试阶段。
+            //    c.SwaggerDoc("v1", new Info { Title = "CronJobs", Version = "v1" });
+            //    c.CustomSchemaIds(type => type.FullName); // 解决相同类名会报错的问题
+            //    c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CronJobs.xml"));
+            //});
 
             services.AddControllers();
         }
@@ -43,7 +47,7 @@ namespace CronJobs
             app.UseStaticFiles();
 
             app.UseRouting();
-
+          
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
