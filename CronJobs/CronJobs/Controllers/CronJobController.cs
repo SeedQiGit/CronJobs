@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CronJobs.Data.Entity;
+﻿using CronJobs.Data.Entity;
 using CronJobs.Data.Request;
 using CronJobs.Services.Interfaces;
 using Infrastructure.Model.Response;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CronJobs.Controllers
 {
@@ -34,18 +32,19 @@ namespace CronJobs.Controllers
             return await _cronJobService.CronJobAdd(request);
         }
 
-        //[HttpPost("Delete")]
-        //public async Task<DeleteResult> Delete([FromBody]string id)
-        //{
-        //    return await _cronJobService.DeleteOneAsync(c=>c.Id==id);
-        //}
+        [HttpPost("CronJobDelete")]
+        [ProducesResponseType(typeof(BaseResponse<DeleteResult>), 1)]
+        public async Task<BaseResponse> CronJobDelete([FromBody]CronJobDelete request)
+        {
+            return await _cronJobService.CronJobDelete(request);
+        }
 
-
-        //[HttpPost("Update")]
-        //public async Task<DeleteResult> Update([FromBody]CronJob id)
-        //{
-        //    return await _cronJobService.DeleteOneAsync(c=>c.Id==id);
-        //}
+        [HttpPost("CronJobUpdate")]
+        [ProducesResponseType(typeof(BaseResponse<ReplaceOneResult>), 1)]
+        public async Task<BaseResponse> CronJobUpdate([FromBody]CronJobUpdateRequest request)
+        {
+            return await _cronJobService.CronJobUpdate(request);
+        }
 
     }
 }

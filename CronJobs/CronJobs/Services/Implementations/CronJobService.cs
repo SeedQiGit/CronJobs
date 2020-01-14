@@ -55,5 +55,30 @@ namespace CronJobs.Services.Implementations
             
             return BaseResponse<CronJob>.Ok(cronJob);
         }
+
+        public async Task<BaseResponse> CronJobDelete(CronJobDelete request)
+        {
+            var deleteResult =await _cronJobRepository.DeleteOneAsync(x => x.Id == request.Id);
+
+            return BaseResponse<DeleteResult>.Ok(deleteResult);
+        }
+
+        public async Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request)
+        {
+            //直接使用替换模式
+            //var update =Builders<CronJob>.Update.Set("UpdateTime",DateTime.Now);
+            //if (request.Description!=null)
+            //{
+            //    update.Set("Description", request.Description);
+            //}
+
+            request.CronJob.UpdateTime=DateTime.Now;
+   
+            //直接使用替换
+            var replaceOneResult =await _cronJobRepository.ReplaceOneAsync(request.CronJob);
+
+            return BaseResponse<ReplaceOneResult>.Ok(replaceOneResult);
+
+        }
     }
 }
