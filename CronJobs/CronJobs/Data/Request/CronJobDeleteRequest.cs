@@ -3,7 +3,7 @@ using Infrastructure.Model.Request;
 
 namespace CronJobs.Data.Request
 {
-    public class CronJobDelete:BaseRequest
+    public class CronJobDeleteRequest:BaseRequest
     {
         /// <summary>
         ///  主键id

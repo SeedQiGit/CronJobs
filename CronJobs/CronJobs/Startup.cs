@@ -13,6 +13,10 @@ using MongoDB.Driver;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using CronJobs.Services.Quartz.Listeners;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Impl.Matchers;
 
 namespace CronJobs
 {
@@ -47,6 +51,14 @@ namespace CronJobs
             services.AddSingleton(config);
             services.AddScoped<IMapper, Mapper>();
 
+            services.AddHostedService<QuartzHandler>();
+
+            var schedulerFactory = new StdSchedulerFactory();
+            var scheduler = schedulerFactory.GetScheduler().Result;
+            //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
+            scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
+            scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
+            scheduler.Start();
 
 
             services.AddControllers()

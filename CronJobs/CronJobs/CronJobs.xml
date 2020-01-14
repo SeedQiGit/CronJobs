@@ -69,7 +69,7 @@
             任务请求得业务地址（目前只支持get请求）
             </summary>           
         </member>
-        <member name="P:CronJobs.Data.Request.CronJobDelete.Id">
+        <member name="P:CronJobs.Data.Request.CronJobDeleteRequest.Id">
             <summary>
              主键id
             </summary>
@@ -92,6 +92,11 @@
         <member name="P:CronJobs.Data.Request.CronJobListRequest.OrderByField">
             <summary>
              排序字段
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobUpdateRequest.CronJob">
+            <summary>
+            CronJob模型  直接用替换
             </summary>
         </member>
         <member name="T:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension">

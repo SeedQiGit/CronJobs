@@ -8,7 +8,7 @@ namespace CronJobs.Services.Interfaces
     {
         Task<BaseResponse> CronJobList(CronJobListRequest request);
         Task<BaseResponse> CronJobAdd( CronJobAddRequest request);
-        Task<BaseResponse> CronJobDelete(CronJobDelete request);
+        Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request);
         Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request);
     }
 }

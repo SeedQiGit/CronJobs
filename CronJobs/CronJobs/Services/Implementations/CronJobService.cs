@@ -47,6 +47,12 @@ namespace CronJobs.Services.Implementations
 
         public async Task<BaseResponse> CronJobAdd( CronJobAddRequest request)
         {
+            //查看是否有同名定时任务
+            var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Name==request.Name);
+            if (nameJob!=null)
+            {
+                return BaseResponse.Failed("已有同名任务");
+            }
             var cronJob = _mapper.Map<CronJob>(request);
             cronJob.CreateTime=DateTime.Now;
             cronJob.UpdateTime=DateTime.Now;
@@ -56,7 +62,7 @@ namespace CronJobs.Services.Implementations
             return BaseResponse<CronJob>.Ok(cronJob);
         }
 
-        public async Task<BaseResponse> CronJobDelete(CronJobDelete request)
+        public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
         {
             var deleteResult =await _cronJobRepository.DeleteOneAsync(x => x.Id == request.Id);
 

@@ -34,7 +34,7 @@ namespace CronJobs.Controllers
 
         [HttpPost("CronJobDelete")]
         [ProducesResponseType(typeof(BaseResponse<DeleteResult>), 1)]
-        public async Task<BaseResponse> CronJobDelete([FromBody]CronJobDelete request)
+        public async Task<BaseResponse> CronJobDelete([FromBody]CronJobDeleteRequest request)
         {
             return await _cronJobService.CronJobDelete(request);
         }
