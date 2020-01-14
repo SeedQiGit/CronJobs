@@ -9,6 +9,8 @@ namespace CronJobs.Data.Entity
     [BsonIgnoreExtraElements]
     public class User:IMongoDbEntity
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         [BsonElement("username")]
         public string Username { get; set; }

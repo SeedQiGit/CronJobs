@@ -20,19 +20,19 @@ namespace CronJobs.Controllers
             _cronJobService = cronJobService;
         }
 
-        [HttpGet("List")]
+        [HttpGet("CronJobList")]
         [ProducesResponseType(typeof(BaseResponse<List<CronJob>>), 1)]
         public async Task<BaseResponse> CronJobList([FromQuery]CronJobListRequest request)
         {
             return await _cronJobService.CronJobList(request);
         }
 
-        //[HttpPost("Add")]
-        //public async Task<string> Add([FromBody] CronJob user)
-        //{ 
-        //    await _cronJobService.AddAsync(user);
-        //    return user.Id;
-        //}
+        [HttpPost("CronJobAdd")]
+        [ProducesResponseType(typeof(BaseResponse<CronJob>), 1)]
+        public async Task<BaseResponse> CronJobAdd([FromBody] CronJobAddRequest request)
+        {
+            return await _cronJobService.CronJobAdd(request);
+        }
 
         //[HttpPost("Delete")]
         //public async Task<DeleteResult> Delete([FromBody]string id)
@@ -40,7 +40,7 @@ namespace CronJobs.Controllers
         //    return await _cronJobService.DeleteOneAsync(c=>c.Id==id);
         //}
 
-        
+
         //[HttpPost("Update")]
         //public async Task<DeleteResult> Update([FromBody]CronJob id)
         //{

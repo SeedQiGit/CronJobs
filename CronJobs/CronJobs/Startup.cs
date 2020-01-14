@@ -1,12 +1,18 @@
-using System;
-using System.IO;
+using AutoMapper;
+using CronJobs.Data.Dto;
 using CronJobs.Infrastructure.Extensions;
 using Infrastructure.Extensions;
+using Infrastructure.Model.Enums;
+using Infrastructure.Model.Response;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
+using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace CronJobs
 {
@@ -33,7 +39,40 @@ namespace CronJobs
             //    c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CronJobs.xml"));
             //});
 
-            services.AddControllers();
+            //services.AddAutoMapper();  这里使用另一种automapper的注入方式
+            AutoMapper.IConfigurationProvider config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<DtoProfile>();
+            });
+            services.AddSingleton(config);
+            services.AddScoped<IMapper, Mapper>();
+
+
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                })
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    //options.SuppressModelStateInvalidFilter = true;
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var validationErrors = context.ModelState
+                            .Keys
+                            .SelectMany(k => context.ModelState[k].Errors)
+                            .Select(e => e.ErrorMessage)
+                            .ToArray();
+                        var json = BaseResponse.GetBaseResponse(BusinessStatusType.ParameterError, string.Join(",", validationErrors));
+
+                        return new BadRequestObjectResult(json)
+                        {
+                            ContentTypes = { "application/problem+json" }
+                        };
+                    };
+                })
+                ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

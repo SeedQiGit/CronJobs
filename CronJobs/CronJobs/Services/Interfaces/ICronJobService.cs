@@ -7,5 +7,6 @@ namespace CronJobs.Services.Interfaces
     public interface ICronJobService
     {
         Task<BaseResponse> CronJobList(CronJobListRequest request);
+        Task<BaseResponse> CronJobAdd( CronJobAddRequest request);
     }
 }

@@ -4,6 +4,11 @@
         <name>CronJobs</name>
     </assembly>
     <members>
+        <member name="T:CronJobs.Data.Entity.CronJob">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CronJobs.Data.Entity.CronJob.Name">
             <summary>
             任务名称
@@ -14,20 +19,15 @@
             任务描述信息
             </summary>           
         </member>
-        <member name="P:CronJobs.Data.Entity.CronJob.Cron">
+        <member name="P:CronJobs.Data.Entity.CronJob.CronExpress">
             <summary>
             运行周期表达式
             </summary>           
         </member>
-        <member name="P:CronJobs.Data.Entity.CronJob.IsDelete">
+        <member name="P:CronJobs.Data.Entity.CronJob.JobState">
             <summary>
-            是否删除  0未删除  1已删除
+               启用=1,暂停=2,删除=3
             </summary>           
-        </member>
-        <member name="P:CronJobs.Data.Entity.CronJob.IsSuspend">
-            <summary>
-             是否暂停  0未暂停  1暂停
-            </summary>
         </member>
         <member name="P:CronJobs.Data.Entity.CronJob.RequestUrl">
             <summary>
@@ -47,6 +47,46 @@
         <member name="T:CronJobs.Data.Entity.User">
             <summary>
             User POCO
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobAddRequest.Name">
+            <summary>
+            任务名称
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobAddRequest.Description">
+            <summary>
+            任务描述信息
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobAddRequest.CronExpress">
+            <summary>
+            运行周期表达式
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobAddRequest.RequestUrl">
+            <summary>
+            任务请求得业务地址（目前只支持get请求）
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobListRequest.JobState">
+            <summary>
+            不筛选=0  启用=1,暂停=2,删除=3
+            </summary>           
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobListRequest.Name">
+            <summary>
+            任务名称
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobListRequest.OrderBy">
+            <summary>
+             0 正序  1逆序
+            </summary>
+        </member>
+        <member name="P:CronJobs.Data.Request.CronJobListRequest.OrderByField">
+            <summary>
+             排序字段
             </summary>
         </member>
         <member name="T:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension">
@@ -88,41 +128,41 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.GetListAsync(System.Int32,System.Int32)">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.GetListAsync(System.Int32,System.Int32)">
             <summary>
             获取所有数据
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             根据表达式获取一条数据
             </summary>
             <param name="ex">Expression</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.AddAsync(`0)">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.AddAsync(`0)">
             <summary>
             添加一个数据
             </summary>
             <param name="addData">添加的数据</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             删除一条数据
             </summary>
             <param name="ex">Expression</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             删除一条数据
             </summary>
             <param name="ex">Expression</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
             <summary>
             单独更新
             </summary>
@@ -130,7 +170,7 @@
             <param name="update">执行更新</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.IRepository.IBaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+        <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
             <summary>
             批量更新
             </summary>
@@ -138,23 +178,23 @@
             <param name="update">执行更新</param>
             <returns></returns>
         </member>
-        <member name="F:CronJobs.Repository.Repository.BaseRepository`1.Context">
+        <member name="F:CronJobs.Repositories.Repository.BaseRepository`1.Context">
             <summary>
             文档
             </summary>
         </member>
-        <member name="F:CronJobs.Repository.Repository.BaseRepository`1.Datebase">
+        <member name="F:CronJobs.Repositories.Repository.BaseRepository`1.Datebase">
             <summary>
             数据库
             </summary>
         </member>
-        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.#ctor(MongoDB.Driver.MongoClient)">
+        <member name="M:CronJobs.Repositories.Repository.BaseRepository`1.#ctor(MongoDB.Driver.MongoClient)">
             <summary>
             构成函数
             </summary>
             <param name="mongoClient"></param>
         </member>
-        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+        <member name="M:CronJobs.Repositories.Repository.BaseRepository`1.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
             <summary>
             单独更新
             </summary>
@@ -162,7 +202,7 @@
             <param name="update">执行更新</param>
             <returns></returns>
         </member>
-        <member name="M:CronJobs.Repository.Repository.BaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
+        <member name="M:CronJobs.Repositories.Repository.BaseRepository`1.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0})">
             <summary>
             批量更新
             </summary>

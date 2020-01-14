@@ -1,4 +1,5 @@
-﻿using CronJobs.Data.Entity;
+﻿using System;
+using CronJobs.Data.Entity;
 using CronJobs.Data.Request;
 using CronJobs.Repositories.IRepository;
 using CronJobs.Services.Interfaces;
@@ -6,16 +7,20 @@ using Infrastructure.Model.Response;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using CronJobs.Data.Enum;
 
 namespace CronJobs.Services.Implementations
 {
     public class CronJobService:ICronJobService
     {
         private readonly ICronJobRepository _cronJobRepository;
+        private readonly IMapper _mapper;
 
-        public CronJobService(ICronJobRepository cronJobRepository)
+        public CronJobService(ICronJobRepository cronJobRepository,IMapper mapper)
         {
             _cronJobRepository = cronJobRepository;
+            _mapper=mapper;
         }
 
         public async Task<BaseResponse> CronJobList(CronJobListRequest request)
@@ -38,6 +43,17 @@ namespace CronJobs.Services.Implementations
             var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
 
             return BaseResponse<List<CronJob>>.Ok(list);
+        }
+
+        public async Task<BaseResponse> CronJobAdd( CronJobAddRequest request)
+        {
+            var cronJob = _mapper.Map<CronJob>(request);
+            cronJob.CreateTime=DateTime.Now;
+            cronJob.UpdateTime=DateTime.Now;
+            cronJob.JobState=JobStateEnum.启用;
+            await _cronJobRepository.AddAsync(cronJob);
+            
+            return BaseResponse<CronJob>.Ok(cronJob);
         }
     }
 }

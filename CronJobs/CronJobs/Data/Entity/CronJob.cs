@@ -1,9 +1,18 @@
 ﻿using System;
+using CronJobs.Data.Enum;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace CronJobs.Data.Entity
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [BsonIgnoreExtraElements]
     public class CronJob : IMongoDbEntity
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         /// <summary>
@@ -22,9 +31,9 @@ namespace CronJobs.Data.Entity
         public string CronExpress { get; set; }
 
         /// <summary>
-        /// 默认=0,暂停=1,删除=2
+        ///    启用=1,暂停=2,删除=3
         /// </summary>           
-        public int JobState{ get; set; }
+        public JobStateEnum JobState{ get; set; }
 
         /// <summary>
         /// 任务请求得业务地址（目前只支持get请求）
