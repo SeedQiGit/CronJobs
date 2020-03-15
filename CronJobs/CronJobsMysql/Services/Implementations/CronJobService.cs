@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
-using CronJobs.Data.Entity;
-using CronJobs.Data.Enum;
-using CronJobs.Data.Request;
 using CronJobsMysql.Services.Interfaces;
 using Infrastructure.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CronJobsMysql.Data.Entity;
+using CronJobsMysql.Data.Enum;
+using CronJobsMysql.Data.Request;
+using CronJobsMysql.Repositories.IRepository;
 
 namespace CronJobsMysql.Services.Implementations
 {
@@ -23,48 +24,52 @@ namespace CronJobsMysql.Services.Implementations
 
         public async Task<BaseResponse> CronJobList(CronJobListRequest request)
         {
-            var filterBuilder = Builders<CronJob>.Filter;
-            var filter = filterBuilder.Empty;
+            //var filterBuilder = Builders<CronJob>.Filter;
+            //var filter = filterBuilder.Empty;
 
-            if (!string.IsNullOrEmpty(request.Name))
-            {
-                filter=filter&filterBuilder.Eq("Name",request.Name);
-            }
+            //if (!string.IsNullOrEmpty(request.Name))
+            //{
+            //    filter=filter&filterBuilder.Eq("Name",request.Name);
+            //}
 
-            if (request.JobState!=0)
-            {
-                filter=filter&filterBuilder.Eq("JobState",request.JobState);
-            }
+            //if (request.JobState!=0)
+            //{
+            //    filter=filter&filterBuilder.Eq("JobState",request.JobState);
+            //}
 
-            var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
+            //var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
 
-            var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
+            //var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
 
-            return BaseResponse<List<CronJob>>.Ok(list);
+            //return BaseResponse<List<CronJob>>.Ok(list);
+            return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobAdd( CronJobAddRequest request)
         {
-            //查看是否有同名定时任务
-            var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Name==request.Name);
-            if (nameJob!=null)
-            {
-                return BaseResponse.Failed("已有同名任务");
-            }
-            var cronJob = _mapper.Map<CronJob>(request);
-            cronJob.CreateTime=DateTime.Now;
-            cronJob.UpdateTime=DateTime.Now;
-            cronJob.JobState=JobStateEnum.启用;
-            await _cronJobRepository.AddAsync(cronJob);
+            ////查看是否有同名定时任务
+            //var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Name==request.Name);
+            //if (nameJob!=null)
+            //{
+            //    return BaseResponse.Failed("已有同名任务");
+            //}
+            //var cronJob = _mapper.Map<CronJob>(request);
+            //cronJob.CreateTime=DateTime.Now;
+            //cronJob.UpdateTime=DateTime.Now;
+            //cronJob.JobState=JobStateEnum.启用;
+            //await _cronJobRepository.AddAsync(cronJob);
             
-            return BaseResponse<CronJob>.Ok(cronJob);
+            //return BaseResponse<CronJob>.Ok(cronJob);
+
+            return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
         {
-            var deleteResult =await _cronJobRepository.DeleteOneAsync(x => x.Id == request.Id);
+            //var deleteResult =await _cronJobRepository.DeleteOneAsync(x => x.Id == request.Id);
 
-            return BaseResponse<DeleteResult>.Ok(deleteResult);
+            //return BaseResponse<DeleteResult>.Ok(deleteResult);
+            return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request)
@@ -76,12 +81,14 @@ namespace CronJobsMysql.Services.Implementations
             //    update.Set("Description", request.Description);
             //}
 
-            request.CronJob.UpdateTime=DateTime.Now;
+            //request.CronJob.UpdateTime=DateTime.Now;
    
-            //直接使用替换
-            var replaceOneResult =await _cronJobRepository.ReplaceOneAsync(request.CronJob);
+            ////直接使用替换
+            //var replaceOneResult =await _cronJobRepository.ReplaceOneAsync(request.CronJob);
 
-            return BaseResponse<ReplaceOneResult>.Ok(replaceOneResult);
+            //return BaseResponse<ReplaceOneResult>.Ok(replaceOneResult);
+
+            return BaseResponse.Ok();
 
         }
     }

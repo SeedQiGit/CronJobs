@@ -1,6 +1,7 @@
 using AutoMapper;
 using CronJobs.Data.Dto;
-using CronJobs.Infrastructure.Extensions;
+using CronJobs.Services.Quartz;
+using CronJobs.Services.Quartz.Listeners;
 using Infrastructure.Extensions;
 using Infrastructure.Model.Enums;
 using Infrastructure.Model.Response;
@@ -10,14 +11,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using CronJobs.Services.Quartz;
-using CronJobs.Services.Quartz.Listeners;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
+using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace CronJobs
 {

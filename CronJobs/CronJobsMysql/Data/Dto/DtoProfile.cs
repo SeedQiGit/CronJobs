@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CronJobs.Data.Entity;
-using CronJobs.Data.Request;
+using CronJobsMysql.Data.Entity;
+using CronJobsMysql.Data.Request;
 
-namespace CronJobs.Data.Dto
+namespace CronJobsMysql.Data.Dto
 {
     public class DtoProfile : Profile
     {

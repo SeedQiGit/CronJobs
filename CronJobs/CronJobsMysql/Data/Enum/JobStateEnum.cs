@@ -1,4 +1,4 @@
-﻿namespace CronJobs.Data.Enum
+﻿namespace CronJobsMysql.Data.Enum
 {
     public enum JobStateEnum
     {

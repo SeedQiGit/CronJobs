@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Model.Request;
 
-namespace CronJobs.Data.Request
+namespace CronJobsMysql.Data.Request
 {
     public class CronJobListRequest:PageRequest
     {

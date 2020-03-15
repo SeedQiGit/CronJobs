@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CronJobs.Data.Request;
+using CronJobsMysql.Data.Request;
 using Infrastructure.Model.Response;
 
 namespace CronJobsMysql.Services.Interfaces

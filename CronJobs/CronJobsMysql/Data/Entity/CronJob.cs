@@ -1,18 +1,15 @@
-﻿using System;
-using CronJobs.Data.Enum;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using CronJobsMysql.Data.Enum;
+using Infrastructure.Model.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CronJobs.Data.Entity
+namespace CronJobsMysql.Data.Entity
 {
     /// <summary>
     /// 
     /// </summary>
-    [BsonIgnoreExtraElements]
-    public class CronJob : IMongoDbEntity
+    public class CronJob :BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         /// <summary>
@@ -40,14 +37,54 @@ namespace CronJobs.Data.Entity
         /// </summary>           
         public string RequestUrl { get; set; }
 
-        /// <summary>
-        /// 创建时间
-        /// </summary>           
-        public DateTime CreateTime { get; set; }
+    }
+    public class CronJobConfiguration : IEntityTypeConfiguration<CronJob>
+    {
+        public void Configure(EntityTypeBuilder<CronJob> entity)
+        {
+            entity.ToTable("cron_job");
 
-        /// <summary>
-        /// 更新时间
-        /// </summary>           
-        public DateTime UpdateTime { get; set; }
+            //entity.HasIndex(e => e.Buid)
+            //    .HasName("idx_buid");
+
+            entity.Property(e => e.Id).HasColumnType("bigint(20)");
+
+            entity.Property(e => e.Name)
+                .HasColumnType("varchar(50)").IsRequired()
+                .HasDefaultValueSql("''");
+
+            entity.Property(e => e.Description)
+                .HasColumnType("varchar(50)").IsRequired()
+                .HasDefaultValueSql("''");
+
+            entity.Property(e => e.CronExpress)
+                .HasColumnType("varchar(400)").IsRequired()
+                .HasDefaultValueSql("''");
+
+            entity.Property(e => e.RequestUrl)
+                .HasColumnType("varchar(500)").IsRequired()
+                .HasDefaultValueSql("''");
+
+            entity.Property(e => e.JobState)
+                .HasColumnType("bigint(20)")
+                .HasDefaultValueSql("'0'");
+
+            entity.Property(e => e.CreateUser)
+                .HasColumnType("bigint(20)")
+                .HasDefaultValueSql("'0'");
+            
+            entity.Property(e => e.UpdateUser)
+                .HasColumnType("bigint(20)")
+                .HasDefaultValueSql("'0'");
+
+            entity.Property(e => e.CreateTime)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                ;
+            entity.Property(e => e.CreateTime)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                .ValueGeneratedOnAddOrUpdate();
+        }
     }
 }

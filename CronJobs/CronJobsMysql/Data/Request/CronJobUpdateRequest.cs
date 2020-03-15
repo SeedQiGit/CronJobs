@@ -1,8 +1,8 @@
-﻿using CronJobs.Data.Entity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using CronJobsMysql.Data.Entity;
 using Infrastructure.Model.Request;
 
-namespace CronJobs.Data.Request
+namespace CronJobsMysql.Data.Request
 {
     public class CronJobUpdateRequest:BaseRequest
     {

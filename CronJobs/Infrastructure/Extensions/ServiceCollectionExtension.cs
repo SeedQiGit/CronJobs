@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace CronJobs.Infrastructure.Extensions
+namespace Infrastructure.Extensions
 {
     /// <summary>
     /// IServiceCollection扩展

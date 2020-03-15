@@ -1,7 +1,7 @@
-﻿using Infrastructure.Model.Request;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Infrastructure.Model.Request;
 
-namespace CronJobs.Data.Request
+namespace CronJobsMysql.Data.Request
 {
     public class CronJobAddRequest:BaseRequest
     {
