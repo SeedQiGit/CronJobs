@@ -99,45 +99,6 @@
             CronJob模型  直接用替换
             </summary>
         </member>
-        <member name="T:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension">
-            <summary>
-            IServiceCollection扩展
-            </summary>
-        </member>
-        <member name="M:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,CronJobs.Infrastructure.Extensions.Lifecycle)">
-            <summary>
-            用DI批量注入接口程序集中对应的实现类。
-            <para>
-            需要注意的是，这里有如下约定：
-            IUserService --> UserService, IUserRepository --> UserRepository.
-            </para>
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
-            <param name="lifecycle"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CronJobs.Infrastructure.Extensions.ServiceCollectionExtension.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,CronJobs.Infrastructure.Extensions.Lifecycle)">
-            <summary>
-            用DI批量注入接口程序集中对应的实现类。
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
-            <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
-            <param name="lifecycle"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CronJobs.Infrastructure.Extensions.Lifecycle">
-            <summary>
-            注入的生命周期
-            </summary>
-        </member>
-        <member name="M:CronJobs.Infrastructure.Extensions.RuntimeHelper.GetAllAssemblies">
-            <summary>
-            获取项目程序集，排除所有的系统程序集(Microsoft.***、System.***等)、Nuget下载包
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.GetListAsync(System.Int32,System.Int32)">
             <summary>
             获取所有数据

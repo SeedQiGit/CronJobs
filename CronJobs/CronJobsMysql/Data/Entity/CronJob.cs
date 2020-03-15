@@ -10,7 +10,7 @@ namespace CronJobsMysql.Data.Entity
     /// </summary>
     public class CronJob :BaseEntity
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 任务名称
@@ -79,12 +79,13 @@ namespace CronJobsMysql.Data.Entity
 
             entity.Property(e => e.CreateTime)
                 .HasColumnType("datetime")
-                .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                //.HasDefaultValueSql("'CURRENT_TIMESTAMP'")
                 ;
             entity.Property(e => e.CreateTime)
                 .HasColumnType("datetime")
-                .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
-                .ValueGeneratedOnAddOrUpdate();
+                //.HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                //.ValueGeneratedOnAddOrUpdate()
+                ;
         }
     }
 }
