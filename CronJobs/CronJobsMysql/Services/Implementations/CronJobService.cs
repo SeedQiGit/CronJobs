@@ -1,16 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
 using CronJobs.Data.Entity;
+using CronJobs.Data.Enum;
 using CronJobs.Data.Request;
-using CronJobs.Repositories.IRepository;
-using CronJobs.Services.Interfaces;
+using CronJobsMysql.Services.Interfaces;
 using Infrastructure.Model.Response;
-using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using CronJobs.Data.Enum; 
 
-namespace CronJobs.Services.Implementations
+namespace CronJobsMysql.Services.Implementations
 {
     public class CronJobService:ICronJobService
     {

@@ -1,10 +1,10 @@
-﻿using Quartz;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Quartz;
 
-namespace CronJobs.Services.Quartz.Listeners
+namespace CronJobsMysql.Services.Quartz.Listeners
 {
     public class SchedulerListener:ISchedulerListener
     {
