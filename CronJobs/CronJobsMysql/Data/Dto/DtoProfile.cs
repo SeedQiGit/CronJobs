@@ -9,7 +9,10 @@ namespace CronJobsMysql.Data.Dto
         public DtoProfile()
         {
             //Add as many of these lines as you need to map your objects
-            CreateMap<CronJobAddRequest, CronJob>();
+            CreateMap<CronJobAddRequest, CronJob>()
+                .ForMember(dest => dest.CreateUser, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.UpdateUser, opt => opt.MapFrom(src => src.UserId))
+                ;
            
             //CreateMap<RecordListViewModel, CallRecordExportModel>()
             //    .ForMember(dest => dest.AnswerState, opt => opt.MapFrom(src => ((AnswerStateEnum)src.AnswerState).ToString()))

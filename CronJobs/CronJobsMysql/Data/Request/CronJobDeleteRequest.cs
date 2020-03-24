@@ -9,6 +9,6 @@ namespace CronJobsMysql.Data.Request
         ///  主键id
         /// </summary>
         [Required]
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 }

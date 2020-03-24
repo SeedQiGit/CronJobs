@@ -40,6 +40,7 @@ namespace CronJobsMysql.Services.Implementations
             cronJob.CreateTime = DateTime.Now;
             cronJob.UpdateTime = DateTime.Now;
             cronJob.JobState = JobStateEnum.启用;
+            
             await _cronJobRepository.InsertAsync(cronJob);
             await _cronJobRepository.SaveChangesAsync();
             return BaseResponse<CronJob>.Ok(cronJob);
@@ -47,22 +48,32 @@ namespace CronJobsMysql.Services.Implementations
 
         public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
         {
-            CronJob cronJob = new CronJob(){Id=6};  
+            CronJob cronJob = new CronJob(){Id=request.Id};  
             _cronJobRepository.Delete(cronJob);
+            await _cronJobRepository.SaveChangesAsync();
             return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request)
         {
-            //直接全更新，测试下是否可行。
-            _cronJobRepository.Update(request.CronJob);
+            ////直接全更新，否可行。
+            ////生产语句UPDATE `cron_job` SET `CreateTime` = @p0, `CreateUser` = @p1, `CronExpress` = @p2, `Description` = @p3, `JobState` = @p4, `Name` = @p5, `RequestUrl` = @p6, `UpdateTime` = @p7, `UpdateUser` = @p8 WHERE `Id` = @p9;
+            //_cronJobRepository.Update(request.CronJob);
+            //await _cronJobRepository.SaveChangesAsync();
+
+            var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c => c.Id == request.CronJob.Id);
+            if (nameJob == null)
+            {
+                return BaseResponse.Failed("未找到对应任务");
+            }
+
+            //排除固定字段的更新  只更新指定改动的字段
+            _cronJobRepository.CompareValueAndassign(nameJob,request.CronJob);
+            nameJob.UpdateUser = request.UserId;
+            
             await _cronJobRepository.SaveChangesAsync();
 
-
-            //排除固定字段的更新
-
-            var a=request.CronJob;
-            return BaseResponse<CronJob>.Ok(request.CronJob);
+            return BaseResponse<CronJob>.Ok(nameJob);
         }
     }
 }

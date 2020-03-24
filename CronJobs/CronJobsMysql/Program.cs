@@ -24,8 +24,8 @@ namespace CronJobsMysql
                 .UseSerilog((context, configuration) =>
                 {
                     configuration
-                        .MinimumLevel.Information()
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                        .MinimumLevel.Debug()
+                        .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
                         .Enrich.FromLogContext()
                         .WriteTo.File(Path.Combine("logs", @"log.txt"), rollingInterval: RollingInterval.Hour);
                 });

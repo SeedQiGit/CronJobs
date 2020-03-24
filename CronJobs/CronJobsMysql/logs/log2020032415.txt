@@ -1,0 +1,311 @@
+2020-03-24 15:32:00.405 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:32:00.417 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:32:00.456 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:32:00.456 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:32:00.488 +08:00 [INF] Request finished in 75.593ms 404 
+2020-03-24 15:32:16.446 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 365
+2020-03-24 15:32:16.455 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:32:16.515 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:32:17.601 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse`1[[CronJobsMysql.Data.Entity.CronJob, CronJobsMysql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-03-24 15:32:17.619 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) in 1098.6505ms
+2020-03-24 15:32:17.621 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:32:17.629 +08:00 [INF] Request finished in 1186.2497ms 200 application/json; charset=utf-8
+2020-03-24 15:34:43.284 +08:00 [DBG] Hosting starting
+2020-03-24 15:34:43.413 +08:00 [DBG] Loaded hosting startup assembly CronJobsMysql
+2020-03-24 15:34:43.415 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:34:43.415 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:34:43.415 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:34:43.415 +08:00 [DBG] Hosting started
+2020-03-24 15:34:43.456 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:34:43.465 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:34:43.500 +08:00 [DBG] No candidates found for the request path '/'
+2020-03-24 15:34:43.500 +08:00 [DBG] Request did not match any endpoints
+2020-03-24 15:34:43.512 +08:00 [INF] Request finished in 59.6929ms 404 
+2020-03-24 15:34:46.271 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 365
+2020-03-24 15:34:46.285 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:34:46.295 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:34:46.296 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:34:46.296 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:34:46.312 +08:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-03-24 15:34:46.371 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:34:46.376 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:34:46.376 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:34:46.376 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:34:46.376 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:34:46.376 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:34:46.377 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:34:46.424 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:34:46.429 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:34:46.430 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:34:46.431 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:34:46.451 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:34:46.451 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:34:46.451 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:34:46.451 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:34:46.464 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:34:47.535 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:34:47.536 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:34:47.536 +08:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-03-24 15:34:47.536 +08:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-03-24 15:34:47.537 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2020-03-24 15:34:47.537 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse`1[[CronJobsMysql.Data.Entity.CronJob, CronJobsMysql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-03-24 15:34:47.556 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) in 1174.7555ms
+2020-03-24 15:34:47.557 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:34:47.564 +08:00 [INF] Request finished in 1295.2895ms 200 application/json; charset=utf-8
+2020-03-24 15:35:27.854 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 370
+2020-03-24 15:35:27.856 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:35:27.856 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:35:27.857 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:35:27.857 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:35:27.858 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:35:27.858 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:35:27.858 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:35:27.858 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:35:27.858 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:35:27.858 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:35:27.858 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:35:27.859 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:35:27.860 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:35:27.860 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:35:27.860 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:35:27.862 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:35:27.862 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:35:27.862 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:35:27.862 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:35:27.862 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:35:27.903 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:35:27.903 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:35:27.903 +08:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-03-24 15:35:27.903 +08:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-03-24 15:35:27.903 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2020-03-24 15:35:27.904 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse`1[[CronJobsMysql.Data.Entity.CronJob, CronJobsMysql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-03-24 15:35:27.904 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) in 45.9814ms
+2020-03-24 15:35:27.904 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:35:27.905 +08:00 [INF] Request finished in 51.4391ms 200 application/json; charset=utf-8
+2020-03-24 15:41:02.694 +08:00 [DBG] Hosting starting
+2020-03-24 15:41:02.873 +08:00 [DBG] Loaded hosting startup assembly CronJobsMysql
+2020-03-24 15:41:02.874 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:41:02.875 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:41:02.875 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:41:02.875 +08:00 [DBG] Hosting started
+2020-03-24 15:41:02.892 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:41:02.899 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:41:02.926 +08:00 [DBG] No candidates found for the request path '/'
+2020-03-24 15:41:02.926 +08:00 [DBG] Request did not match any endpoints
+2020-03-24 15:41:02.937 +08:00 [INF] Request finished in 48.2388ms 404 
+2020-03-24 15:41:11.117 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 373
+2020-03-24 15:41:11.142 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:41:11.151 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:41:11.152 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:41:11.154 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:41:11.176 +08:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-03-24 15:41:11.227 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:41:11.232 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:41:11.233 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:41:11.233 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:41:11.233 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:41:11.233 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:41:11.234 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:41:11.290 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:41:11.295 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:41:11.296 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:41:11.297 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:41:11.317 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:41:11.317 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:41:11.317 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:41:11.317 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:41:11.332 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:41:11.416 +08:00 [INF] Executing action method CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) - Validation state: "Valid"
+2020-03-24 15:46:04.625 +08:00 [DBG] Hosting starting
+2020-03-24 15:46:04.880 +08:00 [DBG] Loaded hosting startup assembly CronJobsMysql
+2020-03-24 15:46:04.881 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:46:04.882 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:46:04.882 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:46:04.882 +08:00 [DBG] Hosting started
+2020-03-24 15:46:04.902 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 374
+2020-03-24 15:46:04.901 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:46:04.910 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:46:04.910 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:46:04.953 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:46:04.954 +08:00 [DBG] No candidates found for the request path '/'
+2020-03-24 15:46:04.955 +08:00 [DBG] Request did not match any endpoints
+2020-03-24 15:46:04.962 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:46:04.963 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:46:04.964 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:46:04.981 +08:00 [INF] Request finished in 82.3751ms 404 
+2020-03-24 15:46:04.987 +08:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-03-24 15:46:05.111 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:46:05.134 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:46:05.134 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:46:05.135 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:46:05.135 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:46:05.135 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:46:05.136 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:46:05.236 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:46:05.247 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:46:05.249 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:46:05.250 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:46:05.316 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:46:05.316 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:46:05.316 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:46:05.316 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:46:05.340 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:46:05.459 +08:00 [INF] Executing action method CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) - Validation state: "Valid"
+2020-03-24 15:56:51.348 +08:00 [DBG] Hosting starting
+2020-03-24 15:56:51.496 +08:00 [DBG] Loaded hosting startup assembly CronJobsMysql
+2020-03-24 15:56:51.499 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:56:51.499 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:56:51.499 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:56:51.499 +08:00 [DBG] Hosting started
+2020-03-24 15:56:51.509 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:56:51.516 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:56:51.550 +08:00 [DBG] No candidates found for the request path '/'
+2020-03-24 15:56:51.550 +08:00 [DBG] Request did not match any endpoints
+2020-03-24 15:56:51.561 +08:00 [INF] Request finished in 55.5226ms 404 
+2020-03-24 15:56:56.378 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 374
+2020-03-24 15:56:56.388 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:56:56.396 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:56:56.397 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:56:56.398 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:56:56.417 +08:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-03-24 15:56:56.464 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:56:56.469 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:56:56.470 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:56:56.470 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:56:56.470 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:56:56.470 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:56:56.470 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:56:56.516 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:56:56.520 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:56:56.521 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:56:56.522 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:56:56.539 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:56:56.540 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:56:56.540 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:56:56.540 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:56:56.551 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:56:57.928 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:56:57.929 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:56:57.929 +08:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-03-24 15:56:57.929 +08:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-03-24 15:56:57.930 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2020-03-24 15:56:57.930 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse`1[[CronJobsMysql.Data.Entity.CronJob, CronJobsMysql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-03-24 15:56:57.948 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) in 1472.6084ms
+2020-03-24 15:56:57.949 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:56:57.956 +08:00 [INF] Request finished in 1581.086ms 200 application/json; charset=utf-8
+2020-03-24 15:58:40.063 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobUpdate application/json 381
+2020-03-24 15:58:40.067 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:58:40.069 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)' with route pattern 'api/CronJob/CronJobUpdate' is valid for the request path '/api/CronJob/CronJobUpdate'
+2020-03-24 15:58:40.069 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:58:40.069 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:58:40.071 +08:00 [INF] Route matched with {action = "CronJobUpdate", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobUpdate(CronJobsMysql.Data.Request.CronJobUpdateRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:58:40.071 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:58:40.071 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:58:40.071 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:58:40.071 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:58:40.071 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:58:40.071 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:58:40.073 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:58:40.074 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:58:40.074 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' using the name '' in request data ...
+2020-03-24 15:58:40.074 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:58:40.076 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'
+2020-03-24 15:58:40.077 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:58:40.077 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:58:40.077 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest' ...
+2020-03-24 15:58:40.078 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobUpdateRequest'.
+2020-03-24 15:58:40.155 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:58:40.155 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:58:40.155 +08:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-03-24 15:58:40.155 +08:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-03-24 15:58:40.155 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2020-03-24 15:58:40.155 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse`1[[CronJobsMysql.Data.Entity.CronJob, CronJobsMysql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-03-24 15:58:40.156 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql) in 84.4391ms
+2020-03-24 15:58:40.156 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobUpdate (CronJobsMysql)'
+2020-03-24 15:58:40.156 +08:00 [INF] Request finished in 94.3729ms 200 application/json; charset=utf-8
+2020-03-24 15:59:25.280 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobDelete application/json 28
+2020-03-24 15:59:25.280 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobDelete'
+2020-03-24 15:59:25.281 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)' with route pattern 'api/CronJob/CronJobDelete' is valid for the request path '/api/CronJob/CronJobDelete'
+2020-03-24 15:59:25.281 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:25.282 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:25.300 +08:00 [INF] Route matched with {action = "CronJobDelete", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobDelete(CronJobsMysql.Data.Request.CronJobDeleteRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:59:25.300 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:59:25.301 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:59:25.301 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:59:25.301 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:59:25.301 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:59:25.302 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:59:25.305 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:59:25.306 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' ...
+2020-03-24 15:59:25.306 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' using the name '' in request data ...
+2020-03-24 15:59:25.306 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:59:25.312 +08:00 [DBG] JSON input formatter threw an exception: The JSON value could not be converted to System.String. Path: $.Id | LineNumber: 1 | BytePositionInLine: 7.
+System.Text.Json.JsonException: The JSON value could not be converted to System.String. Path: $.Id | LineNumber: 1 | BytePositionInLine: 7.
+ ---> System.InvalidOperationException: Cannot get the value of a token type 'Number' as a string.
+   at System.Text.Json.Utf8JsonReader.GetString()
+   at System.Text.Json.Serialization.Converters.JsonConverterString.Read(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options)
+   at System.Text.Json.JsonPropertyInfoNotNullable`4.OnRead(ReadStack& state, Utf8JsonReader& reader)
+   at System.Text.Json.JsonPropertyInfo.Read(JsonTokenType tokenType, ReadStack& state, Utf8JsonReader& reader)
+   at System.Text.Json.JsonSerializer.ReadCore(JsonSerializerOptions options, Utf8JsonReader& reader, ReadStack& readStack)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& readStack, Utf8JsonReader& reader, Exception ex)
+   at System.Text.Json.JsonSerializer.ReadCore(JsonSerializerOptions options, Utf8JsonReader& reader, ReadStack& readStack)
+   at System.Text.Json.JsonSerializer.ReadCore(JsonReaderState& readerState, Boolean isFinalBlock, ReadOnlySpan`1 buffer, JsonSerializerOptions options, ReadStack& readStack)
+   at System.Text.Json.JsonSerializer.ReadAsync[TValue](Stream utf8Json, Type returnType, JsonSerializerOptions options, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+2020-03-24 15:59:25.336 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:25.337 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:25.337 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' ...
+2020-03-24 15:59:25.337 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:25.337 +08:00 [DBG] The request has model state errors, returning an error response.
+2020-03-24 15:59:25.339 +08:00 [DBG] Request was short circuited at action filter 'Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter'.
+2020-03-24 15:59:25.339 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:59:25.340 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:59:25.340 +08:00 [DBG] Attempting to select the first output formatter in the output formatters list which supports a content type from the explicitly specified content types '["application/problem+json"]'.
+2020-03-24 15:59:25.340 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/problem+json' to write the response.
+2020-03-24 15:59:25.340 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse'.
+2020-03-24 15:59:25.342 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql) in 40.5259ms
+2020-03-24 15:59:25.342 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:25.343 +08:00 [INF] Request finished in 63.9192ms 400 application/problem+json; charset=utf-8
+2020-03-24 15:59:50.874 +08:00 [DBG] Hosting starting
+2020-03-24 15:59:51.026 +08:00 [DBG] Loaded hosting startup assembly CronJobsMysql
+2020-03-24 15:59:51.028 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-03-24 15:59:51.028 +08:00 [INF] Hosting environment: Development
+2020-03-24 15:59:51.028 +08:00 [INF] Content root path: D:\CompanyProject\GitHub\CronJobs\CronJobs\CronJobsMysql
+2020-03-24 15:59:51.028 +08:00 [DBG] Hosting started
+2020-03-24 15:59:51.049 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5511/  
+2020-03-24 15:59:51.059 +08:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-03-24 15:59:51.086 +08:00 [DBG] No candidates found for the request path '/'
+2020-03-24 15:59:51.087 +08:00 [DBG] Request did not match any endpoints
+2020-03-24 15:59:51.095 +08:00 [INF] Request finished in 51.2599ms 404 
+2020-03-24 15:59:54.504 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5511/api/CronJob/CronJobDelete application/json 28
+2020-03-24 15:59:54.518 +08:00 [DBG] 1 candidate(s) found for the request path '/api/CronJob/CronJobDelete'
+2020-03-24 15:59:54.529 +08:00 [DBG] Endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)' with route pattern 'api/CronJob/CronJobDelete' is valid for the request path '/api/CronJob/CronJobDelete'
+2020-03-24 15:59:54.532 +08:00 [DBG] Request matched endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:54.533 +08:00 [INF] Executing endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:54.552 +08:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-03-24 15:59:54.618 +08:00 [INF] Route matched with {action = "CronJobDelete", controller = "CronJob"}. Executing controller action with signature System.Threading.Tasks.Task`1[Infrastructure.Model.Response.BaseResponse] CronJobDelete(CronJobsMysql.Data.Request.CronJobDeleteRequest) on controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql).
+2020-03-24 15:59:54.624 +08:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2020-03-24 15:59:54.624 +08:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2020-03-24 15:59:54.625 +08:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-03-24 15:59:54.625 +08:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2020-03-24 15:59:54.625 +08:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-03-24 15:59:54.626 +08:00 [DBG] Executing controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:59:54.696 +08:00 [DBG] Executed controller factory for controller CronJobsMysql.Controllers.CronJobController (CronJobsMysql)
+2020-03-24 15:59:54.702 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' ...
+2020-03-24 15:59:54.704 +08:00 [DBG] Attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' using the name '' in request data ...
+2020-03-24 15:59:54.704 +08:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2020-03-24 15:59:54.717 +08:00 [DBG] JSON input formatter succeeded, deserializing to type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'
+2020-03-24 15:59:54.718 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:54.718 +08:00 [DBG] Done attempting to bind parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:54.718 +08:00 [DBG] Attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest' ...
+2020-03-24 15:59:54.725 +08:00 [DBG] Done attempting to validate the bound parameter 'request' of type 'CronJobsMysql.Data.Request.CronJobDeleteRequest'.
+2020-03-24 15:59:55.336 +08:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-03-24 15:59:55.338 +08:00 [DBG] No information found on request to perform content negotiation.
+2020-03-24 15:59:55.338 +08:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-03-24 15:59:55.338 +08:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-03-24 15:59:55.338 +08:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2020-03-24 15:59:55.338 +08:00 [INF] Executing ObjectResult, writing value of type 'Infrastructure.Model.Response.BaseResponse'.
+2020-03-24 15:59:55.354 +08:00 [INF] Executed action CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql) in 723.8432ms
+2020-03-24 15:59:55.354 +08:00 [INF] Executed endpoint 'CronJobsMysql.Controllers.CronJobController.CronJobDelete (CronJobsMysql)'
+2020-03-24 15:59:55.363 +08:00 [INF] Request finished in 861.5588ms 200 application/json; charset=utf-8
