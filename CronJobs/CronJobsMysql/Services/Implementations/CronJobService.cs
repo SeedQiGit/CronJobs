@@ -1,13 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
+using CronJobsMysql.Data.Request;
+using CronJobsMysql.Repositories.IRepository;
 using CronJobsMysql.Services.Interfaces;
 using Infrastructure.Model.Response;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using CronJobsMysql.Data.Entity;
 using CronJobsMysql.Data.Enum;
-using CronJobsMysql.Data.Request;
-using CronJobsMysql.Repositories.IRepository;
 
 namespace CronJobsMysql.Services.Implementations
 {
@@ -24,72 +23,46 @@ namespace CronJobsMysql.Services.Implementations
 
         public async Task<BaseResponse> CronJobList(CronJobListRequest request)
         {
-            //var filterBuilder = Builders<CronJob>.Filter;
-            //var filter = filterBuilder.Empty;
+            var res = await _cronJobRepository.CronJobList(request);
+            return BaseResponse<BasePageResponse<CronJob>>.Ok(res);
 
-            //if (!string.IsNullOrEmpty(request.Name))
-            //{
-            //    filter=filter&filterBuilder.Eq("Name",request.Name);
-            //}
-
-            //if (request.JobState!=0)
-            //{
-            //    filter=filter&filterBuilder.Eq("JobState",request.JobState);
-            //}
-
-            //var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
-
-            //var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
-
-            //return BaseResponse<List<CronJob>>.Ok(list);
-            return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobAdd( CronJobAddRequest request)
         {
-            ////查看是否有同名定时任务
-            //var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Name==request.Name);
-            //if (nameJob!=null)
-            //{
-            //    return BaseResponse.Failed("已有同名任务");
-            //}
-            //var cronJob = _mapper.Map<CronJob>(request);
-            //cronJob.CreateTime=DateTime.Now;
-            //cronJob.UpdateTime=DateTime.Now;
-            //cronJob.JobState=JobStateEnum.启用;
-            //await _cronJobRepository.AddAsync(cronJob);
-            
-            //return BaseResponse<CronJob>.Ok(cronJob);
-
-            return BaseResponse.Ok();
+            //查看是否有同名定时任务
+            var nameJob = await _cronJobRepository.FirstOrDefaultAsync(c => c.Name == request.Name);
+            if (nameJob != null)
+            {
+                return BaseResponse.Failed("已有同名任务");
+            }
+            var cronJob = _mapper.Map<CronJob>(request);
+            cronJob.CreateTime = DateTime.Now;
+            cronJob.UpdateTime = DateTime.Now;
+            cronJob.JobState = JobStateEnum.启用;
+            await _cronJobRepository.InsertAsync(cronJob);
+            await _cronJobRepository.SaveChangesAsync();
+            return BaseResponse<CronJob>.Ok(cronJob);
         }
 
         public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
         {
-            //var deleteResult =await _cronJobRepository.DeleteOneAsync(x => x.Id == request.Id);
-
-            //return BaseResponse<DeleteResult>.Ok(deleteResult);
+            CronJob cronJob = new CronJob(){Id=6};  
+            _cronJobRepository.Delete(cronJob);
             return BaseResponse.Ok();
         }
 
         public async Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request)
         {
-            //直接使用替换模式
-            //var update =Builders<CronJob>.Update.Set("UpdateTime",DateTime.Now);
-            //if (request.Description!=null)
-            //{
-            //    update.Set("Description", request.Description);
-            //}
+            //直接全更新，测试下是否可行。
+            _cronJobRepository.Update(request.CronJob);
+            await _cronJobRepository.SaveChangesAsync();
 
-            //request.CronJob.UpdateTime=DateTime.Now;
-   
-            ////直接使用替换
-            //var replaceOneResult =await _cronJobRepository.ReplaceOneAsync(request.CronJob);
 
-            //return BaseResponse<ReplaceOneResult>.Ok(replaceOneResult);
+            //排除固定字段的更新
 
-            return BaseResponse.Ok();
-
+            var a=request.CronJob;
+            return BaseResponse<CronJob>.Ok(request.CronJob);
         }
     }
 }

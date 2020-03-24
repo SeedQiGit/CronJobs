@@ -49,19 +49,19 @@ namespace CronJobsMysql
 
             #region 定时任务注册
 
-            services.AddHostedService<QuartzService>();
+            //services.AddHostedService<QuartzService>();
 
-            var schedulerFactory = new StdSchedulerFactory();
-            var scheduler = schedulerFactory.GetScheduler().Result;
-            //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
-            scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
-            scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
-            scheduler.Start();
+            //var schedulerFactory = new StdSchedulerFactory();
+            //var scheduler = schedulerFactory.GetScheduler().Result;
+            ////scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
+            //scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
+            //scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
+            //scheduler.Start();
 
             #endregion
 
             #region MVC
-
+           
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -86,6 +86,8 @@ namespace CronJobsMysql
                     };
                 });
 
+           
+
             services.AddHttpClient();
 
             services.AddHttpContextAccessor();
@@ -108,7 +110,10 @@ namespace CronJobsMysql
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "api/{controller=CronJob}/{action=CronJobList}");
             });
 
             ServiceProviderExtension.ServiceProvider = app.ApplicationServices;

@@ -221,7 +221,7 @@ namespace CronJobsMysql.Repositories.Repositories
         #region 对比字段赋值
 
         /// <summary>
-        ///  对比两个实体不同部分并赋值（排除主键、创建时间和创建人）
+        ///  对比两个实体不同部分并赋值（排除主键、创建时间和创建人、更新时间）
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity">被赋值实体</param>
@@ -229,21 +229,21 @@ namespace CronJobsMysql.Repositories.Repositories
         public void CompareValueAndassign<T>(TEntity entity, T data)
         {
             var entityEntry = Context.Entry(entity);
-            Type etype = entity.GetType();
-            PropertyInfo[] eprops = etype.GetProperties();
+            Type entityType = entity.GetType();
+            PropertyInfo[] entityprops = entityType.GetProperties();
 
-            Type dtype = data.GetType();
-            PropertyInfo[] dprops = dtype.GetProperties();
+            Type dataType = data.GetType();
+            PropertyInfo[] dataProps = dataType.GetProperties();
             //遍历实体属性进行赋值
-            foreach (PropertyInfo pi in eprops)
+            foreach (PropertyInfo pi in entityprops)
             {
                 var fieldName = pi.Name;
-                if (fieldName=="CreateTime")
+                if (fieldName=="CreateTime"||fieldName=="UpdateTime"||fieldName=="CreateUser")
                 {
                     continue;
                 }
                 //不在新数据中
-                var dpi = FindPropertyInfo(dprops, fieldName);
+                var dpi = FindPropertyInfo(dataProps, fieldName);
                 if (dpi == null)
                 {
                     continue;

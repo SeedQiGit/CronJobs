@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 
 namespace CronJobsMysql
 {
@@ -20,7 +18,16 @@ namespace CronJobsMysql
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls(SettingManager.GetValue("HostUrl"));
                     webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog((context, configuration) =>
+                {
+                    configuration
+                        .MinimumLevel.Information()
+                        .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                        .Enrich.FromLogContext()
+                        .WriteTo.File(Path.Combine("logs", @"log.txt"), rollingInterval: RollingInterval.Hour);
                 });
     }
 }

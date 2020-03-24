@@ -1,4 +1,6 @@
-﻿using Infrastructure.Model.Request;
+﻿using System;
+using System.Collections.Generic;
+using Infrastructure.Model.Request;
 
 namespace CronJobsMysql.Data.Request
 {
@@ -23,5 +25,19 @@ namespace CronJobsMysql.Data.Request
         ///  排序字段
         /// </summary>
         public string OrderByField { get; set; }="Id";
+
+        /// <summary>
+        /// 创建时间
+        /// 格式：yyyy-MM-dd HH:mm:ss
+        /// ['2019-07-15 00:00:00','2019-07-15 23:59:59']
+        /// </summary>
+        public  List<DateTime>  CreateTime { get; set; }
+
+        /// <summary>
+        /// 更新时间
+        /// 格式：yyyy-MM-dd HH:mm:ss
+        /// ['2019-07-15 00:00:00','2019-07-15 23:59:59']
+        /// </summary>
+        public  List<DateTime>  UpdateTime { get; set; }
     }
 }
