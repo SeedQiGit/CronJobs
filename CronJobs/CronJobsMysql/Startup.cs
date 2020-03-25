@@ -49,7 +49,7 @@ namespace CronJobsMysql
 
             #region 定时任务注册
 
-            //services.AddHostedService<QuartzService>();
+            services.AddHostedService<QuartzService>();
 
             //var schedulerFactory = new StdSchedulerFactory();
             //var scheduler = schedulerFactory.GetScheduler().Result;

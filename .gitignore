@@ -349,3 +349,4 @@ healthchecksdb
 /BihuTech.IdentityProvider/BihuTech.IdentityProvider/wwwroot/logs
 /BihuTech.BusinessStats/BihuTech.BusinessStats/wwwroot/logs
 /CronJobs/CronJobs/logs
+/CronJobs/CronJobsMysql/logs

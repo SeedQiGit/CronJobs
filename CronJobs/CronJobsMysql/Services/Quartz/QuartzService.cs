@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CronJobsMysql.Services.Quartz.Listeners;
 using Infrastructure.Extensions;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CronJobsMysql.Services.Quartz
 {
@@ -98,16 +99,11 @@ namespace CronJobsMysql.Services.Quartz
     }
     public class DemoJob : IJob
     {
-        private readonly ILogger<DemoJob> _logger;
-
-        public DemoJob(ILogger<DemoJob> logger)
-        {
-            _logger=logger;
-        }
-
         public Task Execute(IJobExecutionContext context)
         {
-            _logger.LogInformation(string.Format("{0}执行一次", DateTime.Now));
+            ILogger logger = ServiceProviderServiceExtensions.GetRequiredService<ILogger<DemoJob>>(
+                ServiceProviderExtension.ServiceProvider);
+            logger.LogInformation(string.Format("{0}执行一次", DateTime.Now));
             return  Task.CompletedTask;
         }
     }

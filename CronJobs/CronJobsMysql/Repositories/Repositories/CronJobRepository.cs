@@ -5,11 +5,10 @@ using Infrastructure.Extensions;
 using Infrastructure.Model.Response;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace CronJobsMysql.Repositories.Repositories
 {
@@ -28,33 +27,32 @@ namespace CronJobsMysql.Repositories.Repositories
 
         public async Task<BasePageResponse<CronJob>> CronJobList(CronJobListRequest request)
         {
-            List<MySqlParameter> ps = new List<MySqlParameter>();
+            //MySqlDbType同时存在于“MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d”和“MySqlConnector, Version=0.61.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92”中
+            //List<MySqlParameter> ps = new List<MySqlParameter>();
             //选取完所有数据，再对数据进行排序。
-         
 
             StringBuilder whereSql = new StringBuilder(" 1=1 ");
 
-            
             if (!string.IsNullOrEmpty(request.Name))
             {
-                whereSql.Append(" and  cron_job.Name=?Name");
-                ps.Add(new MySqlParameter
-                {
-                    Value = request.Name,
-                    ParameterName = "Name",
-                    MySqlDbType = MySqlDbType.VarChar
-                });
+                whereSql.Append($" and  cron_job.Name='{request.Name}'");
+                //ps.Add(new MySqlParameter
+                //{
+                //    Value = request.Name,
+                //    ParameterName = "Name",
+                //    MySqlDbType = MySqlDbType.VarChar
+                //});
             }
 
             if (request.JobState!=0)
             {
-                whereSql.Append(" and  cron_job.JobState=?JobState");
-                ps.Add(new MySqlParameter
-                {
-                    Value = request.JobState,
-                    ParameterName = "JobState",
-                    MySqlDbType = MySqlDbType.Int32
-                });
+                whereSql.Append($" and  cron_job.JobState={request.JobState}");
+                //ps.Add(new MySqlParameter
+                //{
+                //    Value = request.JobState,
+                //    ParameterName = "JobState",
+                //    MySqlDbType = MySqlDbType.Int32
+                //});
             }
 
             StringBuilder orderSql= new StringBuilder(" ");
@@ -87,7 +85,7 @@ namespace CronJobsMysql.Repositories.Repositories
                              WHERE {whereSql} ";
             _logger.LogInformation(sqlcount);
 
-            var count = await Context.SqlQueryFirstAsync<int>(sqlcount, ps.ToArray());
+            var count = await Context.SqlQueryFirstAsync<int>(sqlcount);
 
             #endregion
 
@@ -99,7 +97,7 @@ namespace CronJobsMysql.Repositories.Repositories
 
             string sql = string.Concat(sqlList, limit);
             _logger.LogInformation(sql);
-            var data = await Context.SqlQueryAsync<CronJob>(sql, ps.ToArray());
+            var data = await Context.SqlQueryAsync<CronJob>(sql);
 
             return new BasePageResponse<CronJob>
             {
