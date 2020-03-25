@@ -18,6 +18,7 @@ using Quartz.Impl.Matchers;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Infrastructure.Middlewares;
 
 namespace CronJobsMysql
 {
@@ -107,7 +108,10 @@ namespace CronJobsMysql
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
+            //日志记录中间件  先注册这个，其他的中间件后注册
+            app.UseHttpLogMiddleware();
+            //app.UseExceptionHandling();
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllers();

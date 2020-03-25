@@ -66,22 +66,22 @@ namespace CronJobsMysql.Services.Quartz
         {
             _logger.LogInformation("QuartzService启动");
 
-            DateTime StarTime = DateTime.Now;
-            DateTimeOffset starRunTime = DateBuilder.NextGivenSecondDate(StarTime, 1);
-            DateTime EndTime = DateTime.MaxValue.AddDays(-1);
-            DateTimeOffset endRunTime = DateBuilder.NextGivenSecondDate(EndTime, 1);
-            IJobDetail job = JobBuilder.Create<DemoJob>()
-                .WithIdentity("j1", "g1")
-                .WithDescription("注释")
-                .Build();
-            ICronTrigger trigger = (ICronTrigger)TriggerBuilder.Create()
-                .StartAt(starRunTime)//指定运行时间
-                .EndAt(endRunTime)//指定结束时间
-                .WithIdentity("j1", "g1")
-                .WithCronSchedule("0/5 * * * * ?")//运行模式 每十秒钟运行一次
-                .WithDescription("注释")
-                .Build();
-            await _scheduler.ScheduleJob(job, trigger);
+            //DateTime StarTime = DateTime.Now;
+            //DateTimeOffset starRunTime = DateBuilder.NextGivenSecondDate(StarTime, 1);
+            //DateTime EndTime = DateTime.MaxValue.AddDays(-1);
+            //DateTimeOffset endRunTime = DateBuilder.NextGivenSecondDate(EndTime, 1);
+            //IJobDetail job = JobBuilder.Create<DemoJob>()
+            //    .WithIdentity("j1", "g1")
+            //    .WithDescription("注释")
+            //    .Build();
+            //ICronTrigger trigger = (ICronTrigger)TriggerBuilder.Create()
+            //    .StartAt(starRunTime)//指定运行时间
+            //    .EndAt(endRunTime)//指定结束时间
+            //    .WithIdentity("j1", "g1")
+            //    .WithCronSchedule("0/5 * * * * ?")//运行模式 每十秒钟运行一次
+            //    .WithDescription("注释")
+            //    .Build();
+            //await _scheduler.ScheduleJob(job, trigger);
 
             await _scheduler.Start(cancellationToken);
         }
