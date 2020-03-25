@@ -2,8 +2,8 @@ using AutoMapper;
 using CronJobsMysql.Data.Dto;
 using CronJobsMysql.Data.Entity;
 using CronJobsMysql.Services.Quartz;
-using CronJobsMysql.Services.Quartz.Listeners;
 using Infrastructure.Extensions;
+using Infrastructure.Middlewares;
 using Infrastructure.Model.Enums;
 using Infrastructure.Model.Response;
 using Microsoft.AspNetCore.Builder;
@@ -12,13 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Quartz;
-using Quartz.Impl;
-using Quartz.Impl.Matchers;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Infrastructure.Middlewares;
 
 namespace CronJobsMysql
 {
@@ -33,7 +29,7 @@ namespace CronJobsMysql
             services.RegisterAssembly("CronJobsMysql", Lifecycle.Scoped);
 
             //services.AddAutoMapper();  这里使用另一种automapper的注入方式
-            AutoMapper.IConfigurationProvider config = new MapperConfiguration(cfg =>
+            IConfigurationProvider config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<DtoProfile>();
             });
@@ -111,7 +107,7 @@ namespace CronJobsMysql
             
             //日志记录中间件  先注册这个，其他的中间件后注册
             app.UseHttpLogMiddleware();
-            //app.UseExceptionHandling();
+            app.UseExceptionHandling();
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllers();
