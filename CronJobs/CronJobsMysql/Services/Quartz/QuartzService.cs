@@ -65,6 +65,13 @@ namespace CronJobsMysql.Services.Quartz
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("QuartzService启动");
+            //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
+
+            _scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
+
+            //_scheduler.ListenerManager.AddSchedulerListener(new MySchedulerListener());
+
+            #region 简单测试
 
             //DateTime StarTime = DateTime.Now;
             //DateTimeOffset starRunTime = DateBuilder.NextGivenSecondDate(StarTime, 1);
@@ -82,6 +89,8 @@ namespace CronJobsMysql.Services.Quartz
             //    .WithDescription("注释")
             //    .Build();
             //await _scheduler.ScheduleJob(job, trigger);
+
+            #endregion
 
             await _scheduler.Start(cancellationToken);
         }
