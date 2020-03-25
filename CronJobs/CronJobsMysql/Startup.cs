@@ -61,7 +61,7 @@ namespace CronJobsMysql
             #endregion
 
             #region MVC
-           
+
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {

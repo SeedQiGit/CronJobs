@@ -31,13 +31,13 @@ namespace CronJobsMysql.Data.Request
         /// 格式：yyyy-MM-dd HH:mm:ss
         /// ['2019-07-15 00:00:00','2019-07-15 23:59:59']
         /// </summary>
-        public  List<DateTime>  CreateTime { get; set; }
+        public  List<string>  CreateTime { get; set; }
 
         /// <summary>
         /// 更新时间
         /// 格式：yyyy-MM-dd HH:mm:ss
         /// ['2019-07-15 00:00:00','2019-07-15 23:59:59']
         /// </summary>
-        public  List<DateTime>  UpdateTime { get; set; }
+        public  List<string>  UpdateTime { get; set; }
     }
 }

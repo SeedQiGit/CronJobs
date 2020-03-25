@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CronJobsMysql.Data.Entity;
+﻿using CronJobsMysql.Data.Entity;
 using CronJobsMysql.Data.Request;
 using CronJobsMysql.Repositories.IRepository;
 using Infrastructure.Extensions;
@@ -10,6 +6,10 @@ using Infrastructure.Model.Response;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CronJobsMysql.Repositories.Repositories
 {
@@ -30,7 +30,7 @@ namespace CronJobsMysql.Repositories.Repositories
         {
             List<MySqlParameter> ps = new List<MySqlParameter>();
             //选取完所有数据，再对数据进行排序。
-            StringBuilder getRecordListSql = new StringBuilder(@"SELECT * FROM cron_job WHERE {0} ORDER BY {1} ");
+         
 
             StringBuilder whereSql = new StringBuilder(" 1=1 ");
 
@@ -57,7 +57,7 @@ namespace CronJobsMysql.Repositories.Repositories
                 });
             }
 
-            StringBuilder orderSql= new StringBuilder(" order by ");
+            StringBuilder orderSql= new StringBuilder(" ");
 
             orderSql.Append(request.OrderByField);
 
@@ -67,12 +67,12 @@ namespace CronJobsMysql.Repositories.Repositories
 
             if (request.CreateTime != null && request.CreateTime.Count == 2)
             {
-                whereSql.Append($" AND car.Createdtime BETWEEN '{request.CreateTime.First().ToString("yyyy-MM-dd HH:mm:ss")}' AND '{request.CreateTime.Last().ToString("yyyy-MM-dd HH:mm:ss")}' ");
+                whereSql.Append($" AND cron_job.CreateTime BETWEEN '{request.CreateTime.First()}' AND '{request.CreateTime.Last()}' ");
             }
 
             if (request.UpdateTime != null && request.UpdateTime.Count == 2)
             {
-                whereSql.Append($" AND car.Createdtime BETWEEN '{request.UpdateTime.First().ToString("yyyy-MM-dd HH:mm:ss")}' AND '{request.UpdateTime.Last().ToString("yyyy-MM-dd HH:mm:ss")}' ");
+                whereSql.Append($" AND cron_job.UpdateTime BETWEEN '{request.UpdateTime.First()}' AND '{request.UpdateTime.Last()}' ");
             }
 
             #endregion
@@ -95,7 +95,7 @@ namespace CronJobsMysql.Repositories.Repositories
 
             limit.Append(request.LimitSql());
 
-            var sqlList = string.Format(getRecordListSql.ToString(), whereSql);
+            var sqlList = string.Format(@"SELECT * FROM cron_job WHERE {0} ORDER BY {1} ", whereSql,orderSql);
 
             string sql = string.Concat(sqlList, limit);
             _logger.LogInformation(sql);

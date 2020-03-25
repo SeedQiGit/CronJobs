@@ -17,9 +17,9 @@ namespace CronJobsMysql.Controllers
             _cronJobService = cronJobService;
         }
 
-        [HttpGet("CronJobList")]
+        [HttpPost("CronJobList")]
         [ProducesResponseType(typeof(BaseResponse<List<CronJob>>), 1)]
-        public async Task<BaseResponse> CronJobList([FromQuery]CronJobListRequest request)
+        public async Task<BaseResponse> CronJobList([FromBody]CronJobListRequest request)
         {
             return await _cronJobService.CronJobList(request);
         }

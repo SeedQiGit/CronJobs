@@ -7,6 +7,8 @@ using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 using CronJobsMysql.Services.Quartz.Listeners;
+using Infrastructure.Extensions;
+using System;
 
 namespace CronJobsMysql.Services.Quartz
 {
@@ -17,63 +19,43 @@ namespace CronJobsMysql.Services.Quartz
         private readonly IScheduler _scheduler;
         private readonly ILogger<QuartzService> _logger;
 
-        public QuartzService(JobListener jobListener,SchedulerListener schedulerListener,ILogger<QuartzService> logger)
+        public QuartzService(ILogger<QuartzService> logger)
         {
-//            var properties = new NameValueCollection();
-//            properties[StdSchedulerFactory.PropertySchedulerInstanceName] = "gogogo";
-//            properties[StdSchedulerFactory.PropertySchedulerInstanceId] = "AUTO";
-//            properties[StdSchedulerFactory.PropertyJobStoreType] = typeof (MongoDbJobStore).AssemblyQualifiedName;
-//// I treat the database in the connection string as the one you want to connect to
-//            properties[$"{StdSchedulerFactory.PropertyJobStorePrefix}.{StdSchedulerFactory.PropertyDataSourceConnectionString}"] = "mongodb://localhost/quartz";
-//// The prefix is optional
-//            properties[$"{StdSchedulerFactory.PropertyJobStorePrefix}.collectionPrefix"] = "prefix";
-
-//            var scheduler = new StdSchedulerFactory(properties);
-         
             var schedulerFactory = new StdSchedulerFactory(QuartzConfig());
             //var schedulerFactory = new StdSchedulerFactory(QuartzConfig());
             _scheduler = schedulerFactory.GetScheduler().Result;
-            _scheduler.ListenerManager.AddJobListener(jobListener, GroupMatcher<JobKey>.AnyGroup());
-            _scheduler.ListenerManager.AddSchedulerListener(schedulerListener);
+            //_scheduler.ListenerManager.AddJobListener(jobListener, GroupMatcher<JobKey>.AnyGroup());
+            //_scheduler.ListenerManager.AddSchedulerListener(schedulerListener);
             _logger=logger;
         }
 
         protected NameValueCollection QuartzConfig()
         {
+            //1.首先创建一个作业调度池
             NameValueCollection properties = new NameValueCollection();
-            properties["quartz.scheduler.instanceName"] = "RemoteServer";
-            properties["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool, Quartz";
-            properties["quartz.threadPool.threadCount"] = "5";
-            properties["lazy-init"] = "false";
-            properties["quartz.threadPool.threadPriority"] = "Normal";
-            properties["quartz.scheduler.exporter.type"] = "Quartz.Simpl.RemotingSchedulerExporter, Quartz";
-            properties["quartz.scheduler.exporter.port"] = "665"; //ConfigurationManager.AppSettings["port"];
-            properties["quartz.scheduler.exporter.bindName"] = "QuartzScheduler";// ConfigurationManager.AppSettings["bindName"];//名称
-            //通道类型
-            properties["quartz.scheduler.exporter.channelType"] = "tcp";// ConfigurationManager.AppSettings["channelType"];
-            properties["quartz.scheduler.exporter.channelName"] = "httpQuartz";
-            properties["quartz.scheduler.exporter.rejectRemoteRequests"] = "false";
-            //集群配置
-            properties["quartz.jobStore.clustered"] = "true";
             //存储类型
-            properties["quartz.jobStore.type"] = "Quartz.Impl.AdoJobStore.JobStoreTX, Quartz";
-            //表名前缀
+            properties["quartz.jobStore.type"] = "Quartz.Impl.AdoJobStore.JobStoreTX,Quartz";
+            //表明前缀
             properties["quartz.jobStore.tablePrefix"] = "qrtz_";
             //驱动类型
-            properties["quartz.jobStore.driverDelegateType"] = "Quartz.Impl.AdoJobStore.MySQLDelegate, Quartz";
+            properties["quartz.jobStore.driverDelegateType"] = "Quartz.Impl.AdoJobStore.MySQLDelegate,Quartz";
             //数据源名称
             properties["quartz.jobStore.dataSource"] = "myDS";
 
-            //连接字符串
-            properties["quartz.dataSource.myDS.connectionString"] = "server=xxxx;userid=xxxx;password=xxxx;persistsecurityinfo=True;database=xxxx"; //ConfigurationManager.AppSettings["connectionString"];
+            //连接字符串  根本没执行这个啊
+            properties["quartz.dataSource.myDS.connectionString"] = //"server=127.0.0.1;userid=root;password=123456;persistsecurityinfo=True;database=test"; 
+            SettingManager.GetValue("ConnectionString");
             //版本
             properties["quartz.dataSource.myDS.provider"] = "MySql";
             properties["quartz.scheduler.instanceId"] = "AUTO";
             properties["quartz.serializer.type"] = "binary";
+        
+            //最大链接数
+            //properties["quartz.dataSource.myDS.maxConnections"] = "5";
+            // First we must get a reference to a scheduler
 
             return properties;
         }
-
 
         #endregion
 
@@ -82,6 +64,24 @@ namespace CronJobsMysql.Services.Quartz
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("QuartzService启动");
+
+            DateTime StarTime = DateTime.Now;
+            DateTimeOffset starRunTime = DateBuilder.NextGivenSecondDate(StarTime, 1);
+            DateTime EndTime = DateTime.MaxValue.AddDays(-1);
+            DateTimeOffset endRunTime = DateBuilder.NextGivenSecondDate(EndTime, 1);
+            IJobDetail job = JobBuilder.Create<DemoJob>()
+                .WithIdentity("j1", "g1")
+                .WithDescription("注释")
+                .Build();
+            ICronTrigger trigger = (ICronTrigger)TriggerBuilder.Create()
+                .StartAt(starRunTime)//指定运行时间
+                .EndAt(endRunTime)//指定结束时间
+                .WithIdentity("j1", "g1")
+                .WithCronSchedule("0/5 * * * * ?")//运行模式 每十秒钟运行一次
+                .WithDescription("注释")
+                .Build();
+            await _scheduler.ScheduleJob(job, trigger);
+
             await _scheduler.Start(cancellationToken);
         }
 
@@ -95,5 +95,20 @@ namespace CronJobsMysql.Services.Quartz
         #endregion
 
         
+    }
+    public class DemoJob : IJob
+    {
+        private readonly ILogger<DemoJob> _logger;
+
+        public DemoJob(ILogger<DemoJob> logger)
+        {
+            _logger=logger;
+        }
+
+        public Task Execute(IJobExecutionContext context)
+        {
+            _logger.LogInformation(string.Format("{0}执行一次", DateTime.Now));
+            return  Task.CompletedTask;
+        }
     }
 }
