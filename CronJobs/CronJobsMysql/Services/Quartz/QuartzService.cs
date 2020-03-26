@@ -17,20 +17,25 @@ namespace CronJobsMysql.Services.Quartz
     {
         #region 构造函数及字段
 
-        private readonly IScheduler _scheduler;
+        public static readonly IScheduler Scheduler;
         private readonly ILogger<QuartzService> _logger;
 
-        public QuartzService(ILogger<QuartzService> logger)
+        static QuartzService()
         {
             var schedulerFactory = new StdSchedulerFactory(QuartzConfig());
             //var schedulerFactory = new StdSchedulerFactory(QuartzConfig());
-            _scheduler = schedulerFactory.GetScheduler().Result;
+            Scheduler = schedulerFactory.GetScheduler().Result;
             //_scheduler.ListenerManager.AddJobListener(jobListener, GroupMatcher<JobKey>.AnyGroup());
             //_scheduler.ListenerManager.AddSchedulerListener(schedulerListener);
+        }
+
+        public QuartzService(ILogger<QuartzService> logger)
+        {
+
             _logger=logger;
         }
 
-        protected NameValueCollection QuartzConfig()
+        protected static NameValueCollection QuartzConfig()
         {
             //1.首先创建一个作业调度池
             NameValueCollection properties = new NameValueCollection();
@@ -67,7 +72,7 @@ namespace CronJobsMysql.Services.Quartz
             _logger.LogInformation("QuartzService启动");
             //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
 
-            _scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
+            Scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
 
             //_scheduler.ListenerManager.AddSchedulerListener(new MySchedulerListener());
 
@@ -92,14 +97,14 @@ namespace CronJobsMysql.Services.Quartz
 
             #endregion
 
-            await _scheduler.Start(cancellationToken);
+            await Scheduler.Start(cancellationToken);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("QuartzService停止");
             //这里直接关闭，不等已经执行的任务完成
-            await _scheduler.Shutdown(cancellationToken);
+            await Scheduler.Shutdown(cancellationToken);
         }
 
         #endregion

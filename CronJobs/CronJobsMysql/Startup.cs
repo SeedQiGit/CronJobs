@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using CronJobsMysql.Services.Quartz.Trigger;
 
 namespace CronJobsMysql
 {
@@ -48,12 +49,7 @@ namespace CronJobsMysql
 
             services.AddHostedService<QuartzService>();
 
-            //var schedulerFactory = new StdSchedulerFactory();
-            //var scheduler = schedulerFactory.GetScheduler().Result;
-            ////scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
-            //scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
-            //scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
-            //scheduler.Start();
+            services.AddScoped<JobCronTrigger>();
 
             #endregion
 
@@ -83,8 +79,7 @@ namespace CronJobsMysql
                     };
                 });
 
-           
-
+         
             services.AddHttpClient();
 
             services.AddHttpContextAccessor();
@@ -119,5 +114,6 @@ namespace CronJobsMysql
             ServiceProviderExtension.ServiceProvider = app.ApplicationServices;
 
         }
+
     }
 }

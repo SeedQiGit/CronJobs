@@ -7,6 +7,7 @@ using Infrastructure.Model.Response;
 using System.Threading.Tasks;
 using CronJobsMysql.Data.Entity;
 using CronJobsMysql.Data.Enum;
+using CronJobsMysql.Services.Quartz.Trigger;
 
 namespace CronJobsMysql.Services.Implementations
 {
@@ -14,9 +15,11 @@ namespace CronJobsMysql.Services.Implementations
     {
         private readonly ICronJobRepository _cronJobRepository;
         private readonly IMapper _mapper;
+        private readonly JobCronTrigger _jobCronTrigger;
 
-        public CronJobService(ICronJobRepository cronJobRepository,IMapper mapper)
+        public CronJobService(ICronJobRepository cronJobRepository,IMapper mapper,JobCronTrigger jobCronTrigger)
         {
+            _jobCronTrigger=jobCronTrigger;
             _cronJobRepository = cronJobRepository;
             _mapper=mapper;
         }
@@ -43,6 +46,10 @@ namespace CronJobsMysql.Services.Implementations
             
             await _cronJobRepository.InsertAsync(cronJob);
             await _cronJobRepository.SaveChangesAsync();
+
+
+
+
             return BaseResponse<CronJob>.Ok(cronJob);
         }
 
@@ -74,6 +81,35 @@ namespace CronJobsMysql.Services.Implementations
             await _cronJobRepository.SaveChangesAsync();
 
             return BaseResponse<CronJob>.Ok(nameJob);
+        }
+
+        /// <summary>
+        /// 操作任务
+        /// </summary>
+        /// <param name="jobId">任务编号</param>
+        /// <param name="operateJobFunc">具体操作任务的委托</param>
+        /// <returns></returns>
+        private async Task<BaseResponse> _operateJob(long jobId, Func<CronJob, bool> operateJobFunc)
+        {
+            var jobDetail = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Id==jobId);
+            if (jobDetail == null)
+            {
+                return BaseResponse.Failed("未找到对应任务");
+            }
+            else
+            {
+                _setSpecificTrigger(jobDetail.TriggerType);
+                var isSuccess = operateJobFunc(jobDetail);
+                if (isSuccess)
+                {
+                    ajaxResponseData = ResponseDataFactory.CreateAjaxResponseData("1", "操作成功", jobDetail);
+                }
+                else
+                {
+                    ajaxResponseData = ResponseDataFactory.CreateAjaxResponseData("-10001", "操作失败", jobDetail);
+                }
+            }
+            return ajaxResponseData;
         }
     }
 }

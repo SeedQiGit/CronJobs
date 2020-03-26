@@ -37,6 +37,36 @@ namespace CronJobsMysql.Data.Entity
         /// </summary>           
         public string RequestUrl { get; set; }
 
+        /// <summary>
+        /// 任务组名称
+        /// </summary>
+        public string GroupName
+        { 
+            get
+            {
+                return "JobGroupNameFor"+Name;
+            }
+        }
+
+        /// <summary>
+        /// 触发器名称
+        /// </summary>
+        public string TriggerName
+        { 
+            get
+            {
+                return "TriggerNameFor_"+Name;
+            }
+        }
+
+        /// <summary>
+        /// 触发器组名称
+        /// </summary>
+        public string TriggerGroupName
+        {
+            get { return "TriggerGroupNameFor_" + Name ; }
+        }
+
     }
     public class CronJobConfiguration : IEntityTypeConfiguration<CronJob>
     {
