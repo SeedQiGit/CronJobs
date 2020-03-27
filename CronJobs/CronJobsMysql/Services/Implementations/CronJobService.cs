@@ -47,10 +47,13 @@ namespace CronJobsMysql.Services.Implementations
             await _cronJobRepository.InsertAsync(cronJob);
             await _cronJobRepository.SaveChangesAsync();
 
+            var response=await _operateJob(cronJob.Id, c => _jobCronTrigger.RunJob(c));
 
-
-
-            return BaseResponse<CronJob>.Ok(cronJob);
+            if (response.Code==1)
+            {
+                return BaseResponse<CronJob>.Ok(cronJob);
+            }
+            return response;
         }
 
         public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
@@ -61,6 +64,11 @@ namespace CronJobsMysql.Services.Implementations
             return BaseResponse.Ok();
         }
 
+        /// <summary>
+        /// 不使用
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request)
         {
             ////直接全更新，否可行。
@@ -98,18 +106,22 @@ namespace CronJobsMysql.Services.Implementations
             }
             else
             {
-                _setSpecificTrigger(jobDetail.TriggerType);
+                //_setSpecificTrigger(jobDetail.TriggerType);
                 var isSuccess = operateJobFunc(jobDetail);
                 if (isSuccess)
                 {
-                    ajaxResponseData = ResponseDataFactory.CreateAjaxResponseData("1", "操作成功", jobDetail);
+                    return BaseResponse.Ok();
                 }
                 else
                 {
-                    ajaxResponseData = ResponseDataFactory.CreateAjaxResponseData("-10001", "操作失败", jobDetail);
+                    return BaseResponse.Failed();
                 }
             }
-            return ajaxResponseData;
         }
+
+        //private void _setSpecificTrigger(string triggerType)
+        //{
+        //    _triggerBase = _triggerBases.FirstOrDefault(x => x.GetType().Name == triggerType);
+        //}
     }
 }
