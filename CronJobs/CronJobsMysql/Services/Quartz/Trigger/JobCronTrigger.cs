@@ -14,7 +14,10 @@ namespace CronJobsMysql.Services.Quartz.Trigger
             if (!Scheduler.CheckExists(jobKey).Result)
             {
                 //创建工作
-                IJobDetail jobDetail = JobBuilder.Create<JobExecutor>().WithIdentity(jobKey).UsingJobData(KeyManager.CreateJobDataMap("requestUrl", jobInfo.RequestUrl)).Build();
+                IJobDetail jobDetail = JobBuilder.Create<JobExecutor>().WithIdentity(jobKey)
+                    .UsingJobData(KeyManager.CreateJobDataMap("requestUrl", jobInfo.RequestUrl))
+                    .UsingJobData(KeyManager.CreateJobDataMap("jobId", jobInfo.Id))
+                    .Build();
 
                 //创建事件表
                 CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.CronSchedule(jobInfo.CronExpress);

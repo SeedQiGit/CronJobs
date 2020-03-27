@@ -72,8 +72,10 @@ namespace CronJobsMysql.Services.Quartz
             _logger.LogInformation("QuartzService启动");
             //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
 
+            //工作监听
             Scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
 
+            //暂时不使用MySchedulerListener
             //_scheduler.ListenerManager.AddSchedulerListener(new MySchedulerListener());
 
             #region 简单测试

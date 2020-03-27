@@ -22,7 +22,7 @@ namespace CronJobsMysql.Services.Quartz
 
         public async Task Execute(IJobExecutionContext context)
         {
-            ILogger logger = ServiceProviderExtension.ServiceProvider.GetRequiredService<ILogger<DemoJob>>();
+            ILogger logger = ServiceProviderExtension.ServiceProvider.GetRequiredService<ILogger<JobExecutor>>();
             var client = ServiceProviderExtension.ServiceProvider.GetRequiredService<IHttpClientFactory>().CreateClient();
 
             var url=context.JobDetail.JobDataMap["requestUrl"].ToString();
