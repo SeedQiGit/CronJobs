@@ -13,12 +13,12 @@ namespace CronJobs.Services.Quartz.Listeners
 
         public Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
 
         public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
 
         public Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))

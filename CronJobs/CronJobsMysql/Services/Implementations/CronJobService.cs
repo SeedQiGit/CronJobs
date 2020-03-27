@@ -28,7 +28,6 @@ namespace CronJobsMysql.Services.Implementations
         {
             var res = await _cronJobRepository.CronJobList(request);
             return BaseResponse<BasePageResponse<CronJob>>.Ok(res);
-
         }
 
         public async Task<BaseResponse> CronJobAdd( CronJobAddRequest request)
