@@ -10,5 +10,8 @@ namespace CronJobsMysql.Services.Interfaces
         Task<BaseResponse> CronJobAdd( CronJobAddRequest request);
         Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request);
         Task<BaseResponse> CronJobUpdate(CronJobUpdateRequest request);
+
+        Task<BaseResponse> ModifyCronExpress(ModifyCronExpressRequest request);
+        Task<BaseResponse> CronJobState(CronJobStateRequest request);
     }
 }

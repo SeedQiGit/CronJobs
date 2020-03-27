@@ -29,7 +29,7 @@ namespace CronJobsMysql.Services.Quartz.Trigger
             return true;
         }
 
-        public override bool ModifyJobCron(CronJob jobInfo)
+        public override bool ModifyCronExpress(CronJob jobInfo)
         {
             var scheduleBuilder = CronScheduleBuilder.CronSchedule(jobInfo.CronExpress);
             var triggerKey = KeyManager.CreateTriggerKey(jobInfo.TriggerName, jobInfo.TriggerGroupName);

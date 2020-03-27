@@ -38,19 +38,22 @@ namespace CronJobsMysql.Controllers
             return await _cronJobService.CronJobDelete(request);
         }
 
-        [HttpPost("CronJobDelete")]
+        [HttpPost("CronJobState")]
         [ProducesResponseType(typeof(BaseResponse), 1)]
-        public async Task<BaseResponse> CronJobStop([FromBody]CronJobDeleteRequest request)
+        public async Task<BaseResponse> CronJobState([FromBody]CronJobStateRequest request)
         {
-            return await _cronJobService.CronJobDelete(request);
+            return await _cronJobService.CronJobState(request);
         }
 
-        [HttpPost("CronJobDelete")]
+        [HttpPost("ModifyCronExpress")]
         [ProducesResponseType(typeof(BaseResponse), 1)]
-        public async Task<BaseResponse> CronJobStart([FromBody]CronJobDeleteRequest request)
+        public async Task<BaseResponse> ModifyCronExpress([FromBody]ModifyCronExpressRequest request)
         {
-            return await _cronJobService.CronJobDelete(request);
+            return await _cronJobService.ModifyCronExpress(request);
         }
+
+
+
 
         ///// <summary>
         ///// 更新，暂时不实用，而是直接暂停或者修改时间周期

@@ -47,21 +47,61 @@ namespace CronJobsMysql.Services.Implementations
             await _cronJobRepository.InsertAsync(cronJob);
             await _cronJobRepository.SaveChangesAsync();
 
-            var response=await _operateJob(cronJob.Id, c => _jobCronTrigger.RunJob(c));
-
-            if (response.Code==1)
+            if (_jobCronTrigger.RunJob(cronJob))
             {
                 return BaseResponse<CronJob>.Ok(cronJob);
             }
-            return response;
+            return BaseResponse.Failed();
         }
 
         public async Task<BaseResponse> CronJobDelete(CronJobDeleteRequest request)
         {
-            CronJob cronJob = new CronJob(){Id=request.Id};  
-            _cronJobRepository.Delete(cronJob);
-            await _cronJobRepository.SaveChangesAsync();
-            return BaseResponse.Ok();
+            //CronJob cronJob = new CronJob(){Id=request.Id};  
+            //_cronJobRepository.Delete(cronJob);
+            //await _cronJobRepository.SaveChangesAsync();
+
+            var response=await _operateJob(request.Id, async cronJob =>
+            {
+                _cronJobRepository.Delete(cronJob);
+                await _cronJobRepository.SaveChangesAsync();
+                return _jobCronTrigger.DeleteJob(cronJob);
+            });
+
+            return response;
+        }
+
+        public async Task<BaseResponse> ModifyCronExpress(ModifyCronExpressRequest request)
+        {
+            //var cronJob = await _cronJobRepository.FirstOrDefaultAsync(c => c.Id == request.Id);
+            //if (cronJob == null)
+            //{
+            //    return BaseResponse.Failed("未找到对应任务");
+            //}
+            //cronJob.CronExpress=request.CronExpress;
+            //await _cronJobRepository.SaveChangesAsync();
+            //_jobCronTrigger.ModifyCronExpress(cronJob);
+            //return BaseResponse.Ok();
+
+            return await _operateJob(request.Id, async (jobDetail) =>
+            {
+                jobDetail.CronExpress =request.CronExpress;
+                await _cronJobRepository.SaveChangesAsync(); 
+                return _jobCronTrigger.ModifyCronExpress(jobDetail);
+            });
+        }
+
+        public async Task<BaseResponse> CronJobState(CronJobStateRequest request)
+        {
+            return await _operateJob(request.Id, async (jobDetail) =>
+            {
+                jobDetail.JobState =request.JobState;
+                await _cronJobRepository.SaveChangesAsync();
+                if (request.JobState==JobStateEnum.启用)
+                {
+                    return _jobCronTrigger.ResumeJob(jobDetail);
+                }
+                return _jobCronTrigger.PauseJob(jobDetail);
+            });
         }
 
         /// <summary>
@@ -97,7 +137,7 @@ namespace CronJobsMysql.Services.Implementations
         /// <param name="jobId">任务编号</param>
         /// <param name="operateJobFunc">具体操作任务的委托</param>
         /// <returns></returns>
-        private async Task<BaseResponse> _operateJob(long jobId, Func<CronJob, bool> operateJobFunc)
+        private async Task<BaseResponse> _operateJob(long jobId, Func<CronJob, Task<bool>> operateJobFunc)
         {
             var jobDetail = await _cronJobRepository.FirstOrDefaultAsync(c=>c.Id==jobId);
             if (jobDetail == null)
@@ -107,15 +147,12 @@ namespace CronJobsMysql.Services.Implementations
             else
             {
                 //_setSpecificTrigger(jobDetail.TriggerType);
-                var isSuccess = operateJobFunc(jobDetail);
+                var isSuccess =await operateJobFunc(jobDetail);
                 if (isSuccess)
                 {
                     return BaseResponse.Ok();
                 }
-                else
-                {
-                    return BaseResponse.Failed();
-                }
+                return BaseResponse.Failed();
             }
         }
 

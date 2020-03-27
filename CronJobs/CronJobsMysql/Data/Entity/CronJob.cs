@@ -28,7 +28,7 @@ namespace CronJobsMysql.Data.Entity
         public string CronExpress { get; set; }
 
         /// <summary>
-        ///    启用=1,暂停=2,删除=3
+        ///    暂停=0,启用=1,
         /// </summary>           
         public JobStateEnum JobState{ get; set; }
 

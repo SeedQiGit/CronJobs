@@ -3,6 +3,6 @@
     public enum JobStateEnum
     {
         启用=1,
-        暂停=2
+        暂停=0
     }
 }

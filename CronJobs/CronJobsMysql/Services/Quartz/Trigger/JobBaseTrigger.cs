@@ -7,7 +7,9 @@ namespace CronJobsMysql.Services.Quartz.Trigger
     {
         protected IScheduler Scheduler { get; }=QuartzService.Scheduler;
         public abstract bool RunJob(CronJob jobInfo);
-        public abstract bool ModifyJobCron(CronJob jobInfo);
+
+        public abstract bool ModifyCronExpress(CronJob jobInfo);
+
         public bool DeleteJob(CronJob jobInfo)
         {
             var jobKey = KeyManager.CreateJobKey(jobInfo.Name, jobInfo.GroupName);
