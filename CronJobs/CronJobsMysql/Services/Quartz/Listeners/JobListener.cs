@@ -1,20 +1,21 @@
-﻿using System;
-using Quartz;
-using System.Threading;
-using System.Threading.Tasks;
-using CronJobsMysql.Data.Model;
+﻿using CronJobsMysql.Data.Model;
 using CronJobsMysql.Services.Observer;
 using Infrastructure.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Quartz;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CronJobsMysql.Services.Quartz.Listeners
 {
     public class JobListener:SubjectBase,IJobListener
     {
+        private readonly Observer.Observer _observer;
         public JobListener()
         {
-            new Observer.Observer(this);
+            _observer=new Observer.Observer(this);
         }
 
         public string Name => "JobListener";

@@ -18,7 +18,7 @@ namespace CronJobsMysql.Services.Observer
         public override void SendMail(JobExcutedCallBackModel schedulerExecutedCallBackModel)
         {
             ILogger logger = ServiceProviderExtension.ServiceProvider.GetRequiredService<ILogger<Observer>>();
-            logger.LogInformation("观察者模式发送邮件：");
+            logger.LogInformation("观察者模式发送邮件：由于开源项目，发邮件需要账户密码，这里我就不增加这个步骤了");
         }
     }
 }
