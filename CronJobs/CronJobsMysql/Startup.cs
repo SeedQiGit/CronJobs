@@ -108,7 +108,7 @@ namespace CronJobsMysql
                 //endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "api/{controller=CronJob}/{action=CronJobList}");
+                    pattern: "api/{controller=View}/{action=Index}");
             });
 
             ServiceProviderExtension.ServiceProvider = app.ApplicationServices;

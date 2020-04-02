@@ -2,7 +2,8 @@
 {
     public enum JobStateEnum
     {
+        默认=0,
         启用=1,
-        暂停=0
+        暂停=2
     }
 }

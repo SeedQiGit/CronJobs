@@ -8,12 +8,15 @@ namespace Infrastructure.Extensions
 {
     public class SettingManager
     {
-        private static IConfiguration Configuration;
+        private static readonly IConfiguration Configuration;
+        private static readonly string EnvironmentName;
+
         static SettingManager()
         {
             var provider = new EnvironmentVariablesConfigurationProvider();
             provider.Load();
             provider.TryGet("ASPNETCORE_ENVIRONMENT", out string environmentName);
+            EnvironmentName=environmentName;
             var aa=Directory.GetCurrentDirectory();
             //使用reloadOnChange为true会造成有线程监听配置文件   可以考虑使用依赖注入配置文件或者改为false
             //https://blog.csdn.net/hiliqi/article/details/80953502
