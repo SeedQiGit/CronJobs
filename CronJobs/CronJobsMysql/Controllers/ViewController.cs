@@ -19,12 +19,11 @@ namespace CronJobsMysql.Controllers
         }
 
         /// <summary>
-        ///  
+        /// MVC主页
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-           
             return View();
         }
 

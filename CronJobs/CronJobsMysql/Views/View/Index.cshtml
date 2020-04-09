@@ -27,6 +27,7 @@
                     <a class="navbar-brand" href="/View/Index">任务管理平台</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                    <!-- 导航栏 -->
                     <ul class="nav navbar-nav " id="nav_jobStatusNav">
                         <li v-for="(nav_tab,index) in nav_tabs" :data-jobStatus="nav_tab.tabStatus" v-on:click="getJobs(nav_tab.tabStatus,pageIndex,pageSize);jobStatus=nav_tab.tabStatus"><a href="#" v-bind:class="{active_nav_class:nav_tab.tabStatus==jobStatus}">{{nav_tab.tabName}}</a></li>
                     </ul>
@@ -46,7 +47,7 @@
                         <th>描述</th>
                         <th>执行周期</th>
                         @*<th>上次执行时间</th>
-                        <th>下次执行时间</th>*@
+                            <th>下次执行时间</th>*@
                         <th>创建时间</th>
                         @*<th>异常信息</th>*@
                         <th>操作</th>
@@ -56,17 +57,16 @@
                     <tr v-for="job in jobs" data-jobId="job.Id">
                         <td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>
                         <td>
-                            <button type="button" class="btn" v-if="jobStatus==-1" v-on:click="runJob(job.Id)">部署任务</button>
-                            <button type="button" class="btn" v-if="jobStatus==6||jobStatus==-2" v-on:click="pauseJob(job.Id)">暂停任务</button>
-                            <button type="button" class="btn" v-if="jobStatus==1" v-on:click="resumeJob(job.Id)">恢复任务</button>
-                            <button type="button" class="btn" v-if="jobStatus!=5" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
-                            <button type="button" class="btn" v-if="jobStatus==6||jobStatus==-2" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
+                            <button type="button" class="btn" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">部署任务</button>
+                            <button type="button" class="btn" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <!--任务列表结束-->
-            <!--新增任务弹出框开始-->
+            <!--新增任务弹出框开始  todo 把这个页面拆分到单独的页面-->
             <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -82,39 +82,18 @@
                         <div class="modal-body">
                             <div>
                                 <form class="" id="addJobForm" role="form">
-                                    <div>
-                                        <label><input type="radio" name="triggerType" value="JobCronTrigger" id="option1" v-bind:checked="cronCheck" v-on:click="cronCheck=true;simpleCheck=false;">Cron任务</label>
-                                        &nbsp;
-                                        <label><input type="radio" name="triggerType" id="option2" value="JobSimpleTrigger" v-bind:checked="simpleCheck" v-on:click="cronCheck=false;simpleCheck=true;">Simple任务</label>
-                                    </div>
                                     <div class="input-group">
                                         <span class="input-group-addon">任务名称：</span>
                                         <input type="text" class="form-control" placeholder="xxx" name="jobName" v-model="addOrEditModel.jobName">
                                     </div>
                                     <br>
 
-                                    <div v-if="cronCheck">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">执行周期表达式：</span>
-                                            <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="addOrEditModel.cron" style="width:66%">
-                                            <a href="javascript:;" style="margin-left:20px;" data-toggle="modal" data-target="#myModal_settingCron">不会写？点击这里</a>
-                                        </div>
-                                        <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">执行周期表达式：</span>
+                                        <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="addOrEditModel.cron" style="width:66%">
+                                        <a href="javascript:;" style="margin-left:20px;" data-toggle="modal" data-target="#myModal_settingCron">不会写？点击这里</a>
                                     </div>
-                                    <div v-if="simpleCheck">
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon">执行周期：</span>
-                                            <input type="text" class="form-control" placeholder="xxx" name="cycle" v-model="addOrEditModel.cycle">
-                                        </div>
-                                        <br>
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon">重复次数：</span>
-                                            <input type="text" class="form-control" placeholder="xxx" name="repeatCount" v-model="addOrEditModel.repeatCount">
-                                        </div>
-                                        <br>
-                                    </div>
+                                    <br>
 
                                     <div class="input-group">
                                         <span class="input-group-addon">任务描述：</span>
@@ -126,10 +105,7 @@
                                         <input type="text" class="form-control" placeholder="xxx" name="requestUrl" v-model="addOrEditModel.requestUrl">
                                     </div>
                                     <br>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">选择服务节点：</span>
-                                        <input type="range" class="form-control" placeholder="xxx" name="requestUrl" v-model="addOrEditModel.requestUrl">
-                                    </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn"
                                                 data-dismiss="modal">
@@ -153,7 +129,9 @@
                 <li><a href="#" v-if="pageIndex<Math.ceil(totalCount/pageSize)" v-on:click="pageIndex=pageIndex+1;getJobs(jobStatus,pageIndex,pageSize)">下一页</a></li>
             </ul>
             <!--分页结束-->
+
         </div>
+
         <!--选择Cron开始-->
         <div class="modal fade" id="myModal_settingCron" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="width:900px">
@@ -170,14 +148,13 @@
                     <div class="modal-body" style="height:600px;">
                         <div>
                             <iframe src="http://cron.qqe2.com/" style="width:850px;height:560px;" scrolling="no"></iframe>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <!--选择Cron结束-->
+
         <!--删除提示框开始-->
         <div class="modal fade" id="myModal_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -197,6 +174,7 @@
             </div>
         </div>
         <!--删除提示框结束-->
+
         <!--更改运行周期开始-->
         <div class="modal fade" id="myModal_modifyJobCron" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -221,6 +199,7 @@
             </div>
         </div>
         <!--更改运行周期结束-->
+
         <!--加载动画开始-->
         <div class="loadEffect">
             <span></span>
@@ -249,12 +228,12 @@
             data: {
                 jobs: [],
                 modalLabelText: '新任务',
-                jobStatus: 6,
+                jobStatus: 0,
                 pageIndex: 1,
-                pageSize: 5,
+                pageSize: 10,
                 totalCount: 0,
                 cronForModify: '',
-                excuteJobId: -1,
+                excuteJobId: 0,
                 cronCheck: true,
                 simpleCheck: false,
                 nav_tabs: [
@@ -279,11 +258,13 @@
                 $('#inputFile').filestyle();
                 getJobList.bind(this)(this.jobStatus, this.pageIndex, this.pageSize);
             },
+
             methods: {
                 //获取任务集合
                 getJobs: function (jobStatus, pageIndex, pageSize) {
                     getJobList.bind(this)(jobStatus, pageIndex, pageSize);
                 },
+
                 addJob: function (event) {
                     var triggerType = '';
                     var cronJob = {};
@@ -315,6 +296,7 @@
                         $('#nav_jobStatusNav li[data-jobStatus=-2]').click();
                     });
                 },
+
                 //暂停任务
                 pauseJob: function (jobId) {
                     $.post('/JobManager/PauseJob', { jobId: jobId }, function (data) {
@@ -322,25 +304,19 @@
                         $('#nav_jobStatusNav li[data-jobStatus=1]').click();
                     });
                 },
-                //恢复任务
-                resumeJob: function (jobId) {
-                    $.post('/JobManager/ResumeJob', { jobId: jobId }, function (data) {
-                        operateElement(jobId);
-                        $('#nav_jobStatusNav li[data-jobStatus=6]').click();
-                    });
-                },
+   
                 //删除任务
                 deleteJob: function (jobId) {
-
-                    $.post('/JobManager/DeleteJob', { jobId: jobId }, function (data) {
+                    $.post('api/CronJob/CronJobDelete', { Id: jobId }, function (data) {
                         $('#myModal_delete').modal('hide');
                         operateElement(jobId);
                         $('#nav_jobStatusNav li[data-jobStatus=5]').click();
                     });
                 },
+
                 //修改任务执行周期
                 modifyJobCron: function (jobId, cron) {
-                    $.post('/JobManager/ModifyJobCron', { jobId: jobId, cron: cron }, function (data) {
+                    $.post('api/CronJob/ModifyCronExpress', { jobId: jobId, cron: cron }, function (data) {
                         $('#jobListTbody tr td[name=Cron]').text(cron);
 
                         $('#myModal_modifyJobCron').modal('hide');
@@ -350,11 +326,12 @@
         });
         window.vm = vm;
     });
+
     //获取当前状态下任务列表分页数据
     function getJobList(jobStatus, pageIndex, pageSize) {
         $('.loadEffect').show();
         var self = this;
-        $.get('/CronJob/CronJobList', { jobStatus: jobStatus, pageIndex: pageIndex, pageSize: pageSize }, function (data) {
+        $.get('api/CronJob/CronJobList', { jobStatus: jobStatus, pageIndex: pageIndex, pageSize: pageSize }, function (data) {
             self.jobs = data.Data.JobList;
             self.totalCount = data.Data.TotalCount;
             self.jobStatus = jobStatus;
