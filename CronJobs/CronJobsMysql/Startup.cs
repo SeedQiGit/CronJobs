@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using CronJobsMysql.Services.Quartz.Trigger;
+using Infrastructure.Helper;
 
 namespace CronJobsMysql
 {
@@ -58,6 +59,7 @@ namespace CronJobsMysql
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
                 {
+                    options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                     options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
                 })
                 .ConfigureApiBehaviorOptions(options =>

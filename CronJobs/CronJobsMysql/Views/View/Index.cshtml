@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Infrastructure.Extensions
+@{
 
     ViewBag.Title = "任务管理平台";
     Layout = null;
@@ -49,13 +50,31 @@
                         @*<th>上次执行时间</th>
                             <th>下次执行时间</th>*@
                         <th>创建时间</th>
-                        @*<th>异常信息</th>*@
+                        <th>请求连接</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody id="jobListTbody">
                     <tr v-for="job in jobs" data-jobId="job.Id">
-                        <td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>
+                        @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
+                        <td>
+                            {{job.id}}
+                        </td>
+                        <td>
+                            {{job.name}}
+                        </td>
+                        <td>
+                            {{job.description}}
+                        </td>
+                        <td v-bind:name="job.cronExpress">
+                            {{job.cronExpress}}
+                        </td>
+                        <td>
+                            {{job.createTime}}
+                        </td>
+                        <td>
+                            {{job.requestUrl}}
+                        </td>
                         <td>
                             <button type="button" class="btn" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">部署任务</button>
                             <button type="button" class="btn" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
@@ -222,6 +241,7 @@
 <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
 <script src="~/Scripts/vue.min.js"></script>
 <script>
+    var hostUrl="@SettingManager.GetValue("PublishUrl")";
     $(function () {
         var vm = new Vue({
             el: '#JobShow',
@@ -317,7 +337,7 @@
                 //修改任务执行周期
                 modifyJobCron: function (jobId, cron) {
                     $.post('api/CronJob/ModifyCronExpress', { jobId: jobId, cron: cron }, function (data) {
-                        $('#jobListTbody tr td[name=Cron]').text(cron);
+                        $('#jobListTbody tr td[name=cronExpress]').text(cron);
 
                         $('#myModal_modifyJobCron').modal('hide');
                     });
@@ -326,17 +346,37 @@
         });
         window.vm = vm;
     });
-
+  
     //获取当前状态下任务列表分页数据
     function getJobList(jobStatus, pageIndex, pageSize) {
         $('.loadEffect').show();
         var self = this;
-        $.get('api/CronJob/CronJobList', { jobStatus: jobStatus, pageIndex: pageIndex, pageSize: pageSize }, function (data) {
-            self.jobs = data.Data.JobList;
-            self.totalCount = data.Data.TotalCount;
-            self.jobStatus = jobStatus;
-            $('.loadEffect').hide();
+
+        var request = {UserId: 11,  jobState:jobStatus,PageIndex:pageIndex,PageSize:pageSize };
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: hostUrl + '/api/CronJob/CronJobList',
+            data: JSON.stringify(request),
+            //返回数据类型
+            dataType: "json",
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                self.jobs = data.data.dataList;
+                self.totalCount = data.data.totalCount;
+                self.jobStatus = jobStatus;
+                $('.loadEffect').hide();
+            }
         });
+
+
+        //$.post(hostUrl + '/api/CronJob/CronJobList', { jobStatus: jobStatus, pageIndex: pageIndex, pageSize: pageSize }, function (data) {
+        //    self.jobs = data.Data.JobList;
+        //    self.totalCount = data.Data.TotalCount;
+        //    self.jobStatus = jobStatus;
+        //    $('.loadEffect').hide();
+        //});
     };
     //操作dom元素
     function operateElement(jobId) {

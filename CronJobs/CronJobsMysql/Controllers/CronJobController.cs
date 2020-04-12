@@ -18,7 +18,7 @@ namespace CronJobsMysql.Controllers
         }
 
         [HttpPost("CronJobList")]
-        [ProducesResponseType(typeof(BaseResponse<List<CronJob>>), 1)]
+        [ProducesResponseType(typeof(BasePageResponse<CronJob>), 1)]
         public async Task<BaseResponse> CronJobList([FromBody]CronJobListRequest request)
         {
             return await _cronJobService.CronJobList(request);
