@@ -16,23 +16,25 @@
 </head>
 <body class="">
     <div class="container-div" id="JobShow" v-cloak>
-        <nav class="navbar">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
-                <div class="">
-                    <button type="button" class="" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class=""></span>
-                        <span class=""></span>
-                        <span class=""></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/View/Index">任务管理平台</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                     <!-- 导航栏 -->
                     <ul class="nav navbar-nav " id="nav_jobStatusNav">
-                        <li v-for="(nav_tab,index) in nav_tabs" :data-jobStatus="nav_tab.tabStatus" v-on:click="getJobs(nav_tab.tabStatus,pageIndex,pageSize);jobStatus=nav_tab.tabStatus"><a href="#" v-bind:class="{active_nav_class:nav_tab.tabStatus==jobStatus}">{{nav_tab.tabName}}</a></li>
+                        <li v-for="(nav_tab,index) in nav_tabs" :data-jobStatus="nav_tab.tabStatus" v-on:click="getJobs(nav_tab.tabStatus,pageIndex,pageSize);jobStatus=nav_tab.tabStatus">
+                            <a href="#" v-bind:class="{active_nav_class:nav_tab.tabStatus==jobStatus}">{{nav_tab.tabName}}</a>
+                        </li>
                     </ul>
-                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal_add" v-on:click="modalLabelText='新任务'">添加任务</button>
+                    <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#myModal_add" v-on:click="modalLabelText='新任务'">添加任务</button>
                 </div>
             </div>
         </nav>
@@ -76,10 +78,10 @@
                             {{job.requestUrl}}
                         </td>
                         <td>
-                            <button type="button" class="btn" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">部署任务</button>
-                            <button type="button" class="btn" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
-                            <button type="button" class="btn" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
-                            <button type="button" class="btn" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
+                            <button type="button" class="btn btn-default" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">启动任务</button>
+                            <button type="button" class="btn btn-default" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
                         </td>
                     </tr>
                 </tbody>
@@ -369,14 +371,6 @@
                 $('.loadEffect').hide();
             }
         });
-
-
-        //$.post(hostUrl + '/api/CronJob/CronJobList', { jobStatus: jobStatus, pageIndex: pageIndex, pageSize: pageSize }, function (data) {
-        //    self.jobs = data.Data.JobList;
-        //    self.totalCount = data.Data.TotalCount;
-        //    self.jobStatus = jobStatus;
-        //    $('.loadEffect').hide();
-        //});
     };
     //操作dom元素
     function operateElement(jobId) {
