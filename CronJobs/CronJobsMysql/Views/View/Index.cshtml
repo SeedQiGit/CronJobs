@@ -11,7 +11,6 @@
 
     <link href="~/favicon.ico" rel="shortcut icon" type="images/x-icon">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="~/Content/QuartzJobManageIndex.css" rel="stylesheet" />
 </head>
 <body class="">
@@ -37,50 +36,49 @@
             <!--任务列表开始-->
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        @*<th>类型</th>*@
-                        <th>描述</th>
-                        <th>执行周期</th>
-                        @*<th>上次执行时间</th>
-                            <th>下次执行时间</th>*@
-                        <th>创建时间</th>
-                        <th>请求连接</th>
-                        <th>操作</th>
-                    </tr>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    
+                    <th>描述</th>
+                    <th>执行周期</th>
+                    <th>创建时间</th>
+                    <th>请求连接</th>
+                    <th>操作</th>
+                </tr>
                 </thead>
                 <tbody id="jobListTbody">
-                    <tr v-for="job in jobs" data-jobId="job.Id">
-                        @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
-                        <td>
-                            {{job.id}}
-                        </td>
-                        <td>
-                            {{job.name}}
-                        </td>
-                        <td>
-                            {{job.description}}
-                        </td>
-                        <td v-bind:name="job.cronExpress">
-                            {{job.cronExpress}}
-                        </td>
-                        <td>
-                            {{job.createTime}}
-                        </td>
-                        <td>
-                            {{job.requestUrl}}
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">启动任务</button>
-                            <button type="button" class="btn btn-default" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
-                        </td>
-                    </tr>
+                <tr v-for="job in jobs" data-jobId="job.Id">
+                    @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
+                    <td>
+                        {{job.id}}
+                    </td>
+                    <td>
+                        {{job.name}}
+                    </td>
+                    <td>
+                        {{job.description}}
+                    </td>
+                    <td v-bind:name="job.cronExpress">
+                        {{job.cronExpress}}
+                    </td>
+                    <td>
+                        {{job.createTime}}
+                    </td>
+                    <td>
+                        {{job.requestUrl}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">启动任务</button>
+                        <button type="button" class="btn btn-default" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <!--任务列表结束-->
+
             <!--新增任务弹出框开始  todo 把这个页面拆分到单独的页面-->
             <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -138,6 +136,7 @@
                 </div>
             </div>
             <!--新增弹出框结束-->
+            
             <!--分页开始-->
             <ul class="pager" v-if="totalCount>pageSize">
                 <li><a href="#" v-if="pageIndex>1" v-on:click="pageIndex=pageIndex-1;getJobs(jobStatus,pageIndex,pageSize)">上一页</a></li>
@@ -147,29 +146,7 @@
 
         </div>
 
-        <!--选择Cron开始-->
-        <div class="modal fade" id="myModal_settingCron" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" style="width:900px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">
-                            ×
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel_add">
-                            配置Cron表达式
-                        </h4>
-                    </div>
-                    <div class="modal-body" style="height:600px;">
-                        <div>
-                            <iframe src="http://cron.qqe2.com/" style="width:850px;height:560px;" scrolling="no"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!--选择Cron结束-->
-
         <!--删除提示框开始-->
         <div class="modal fade" id="myModal_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -216,30 +193,21 @@
         <!--更改运行周期结束-->
 
         <!--加载动画开始-->
-        <div class="loadEffect">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="spinner" style="display:none">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
         </div>
         <!--加载动画结束-->
     </div>
 </body>
 </html>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jQuery1.11.3.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-<script src="~/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
-<script src="~/Scripts/bootstrap-filestyle.min.js"></script>
 <script src="~/Scripts/vue.min.js"></script>
 <script>
     var hostUrl="@SettingManager.GetValue("PublishUrl")";
     $(function () {
-        var vm = new Vue({
+        var vm = new window.Vue({
             el: '#JobShow',
             data: {
                 jobs: [],
@@ -270,8 +238,6 @@
             },
 
             mounted: function () {
-                $('#datetimepicker').datetimepicker();
-                $('#inputFile').filestyle();
                 getJobList.bind(this)(this.jobStatus, this.pageIndex, this.pageSize);
             },
 
@@ -345,7 +311,7 @@
   
     //获取当前状态下任务列表分页数据
     function getJobList(jobStatus, pageIndex, pageSize) {
-        $('.loadEffect').show();
+        $('.spinner').show();
         var self = this;
 
         var request = {UserId: 11,  jobState:jobStatus,PageIndex:pageIndex,PageSize:pageSize };
@@ -362,7 +328,7 @@
                 self.jobs = data.data.dataList;
                 self.totalCount = data.data.totalCount;
                 self.jobStatus = jobStatus;
-                $('.loadEffect').hide();
+                $('.spinner').hide();
             }
         });
     };

@@ -5,13 +5,13 @@
     position: relative;
 }
 
-    .top-title-div h1 {
-        height: 20px;
-        position: absolute;
-        top: 50%;
-        left: 10%;
-        margin-top: -10px;
-    }
+.top-title-div h1 {
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    margin-top: -10px;
+}
 
 .container-div {
     width: 100%;
