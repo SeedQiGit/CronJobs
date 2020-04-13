@@ -77,6 +77,8 @@ namespace CronJobs.Services.Implementations
             //{
             //    update.Set("Description", request.Description);
             //}
+            //   压入数组     UpdateDefinition<JiaYiMongo> update = Builders<JiaYiMongo>.Update.Push(x => x.JiaYiResult, jiaYiItem);
+
 
             request.CronJob.UpdateTime=DateTime.Now;
    
