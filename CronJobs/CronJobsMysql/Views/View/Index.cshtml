@@ -14,7 +14,7 @@
     <link href="~/Content/QuartzJobManageIndex.css" rel="stylesheet" />
 </head>
 <body class="">
-    <div class="container-div" id="JobShow" v-cloak>
+    <div class="" id="JobShow" v-cloak>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -27,7 +27,10 @@
                             <a href="#" v-bind:class="{active_nav_class:nav_tab.tabStatus==jobStatus}">{{nav_tab.tabName}}</a>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#myModal_add" v-on:click="modalLabelText='新任务'">添加任务</button>
+                    <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#modalAdd" 
+                            @*data-backdrop="static" 点击外围不能关闭*@
+                            @*data-keyboard="true" 默认就是true*@
+                            v-on:click="modalLabelText='新任务'">添加任务</button>
                 </div>
             </div>
         </nav>
@@ -36,115 +39,110 @@
             <!--任务列表开始-->
             <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th>编号</th>
-                    <th>名称</th>
-                    
-                    <th>描述</th>
-                    <th>执行周期</th>
-                    <th>创建时间</th>
-                    <th>请求连接</th>
-                    <th>操作</th>
-                </tr>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+
+                        <th>描述</th>
+                        <th>执行周期</th>
+                        <th>创建时间</th>
+                        <th>请求连接</th>
+                        <th>操作</th>
+                    </tr>
                 </thead>
                 <tbody id="jobListTbody">
-                <tr v-for="job in jobs" data-jobId="job.Id">
-                    @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
-                    <td>
-                        {{job.id}}
-                    </td>
-                    <td>
-                        {{job.name}}
-                    </td>
-                    <td>
-                        {{job.description}}
-                    </td>
-                    <td v-bind:name="job.cronExpress">
-                        {{job.cronExpress}}
-                    </td>
-                    <td>
-                        {{job.createTime}}
-                    </td>
-                    <td>
-                        {{job.requestUrl}}
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-default" v-if="jobStatus==-2" v-on:click="runJob(job.Id)">启动任务</button>
-                        <button type="button" class="btn btn-default" v-if="jobStatus==1" v-on:click="pauseJob(job.Id)">暂停任务</button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
-                    </td>
-                </tr>
+                    <tr v-for="(job,index) in jobs" data-jobId="job.Id">
+                        @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
+                        <td>
+                            {{job.id}}
+                        </td>
+                        <td>
+                            {{job.name}}
+                        </td>
+                        <td>
+                            {{job.description}}
+                        </td>
+                        <td v-bind:name="job.cronExpress">
+                            {{job.cronExpress}}
+                        </td>
+                        <td>
+                            {{job.createTime}}
+                        </td>
+                        <td>
+                            {{job.requestUrl}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default" v-show="job.jobState==2"   v-on:click="runJob(job.Id)">启动任务</button>
+                            <button type="button" class="btn btn-default" v-show="job.jobState==1"  v-on:click="pauseJob(job.Id)">
+                                暂停任务
+                            </button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <!--任务列表结束-->
-
-            <!--新增任务弹出框开始  todo 把这个页面拆分到单独的页面-->
-            <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                    aria-hidden="true">
-                                ×
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel_add">
-                                {{modalLabelText}}
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <form class="" id="addJobForm" role="form">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">任务名称：</span>
-                                        <input type="text" class="form-control" placeholder="xxx" name="jobName" v-model="addOrEditModel.jobName">
-                                    </div>
-                                    <br>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon">执行周期表达式：</span>
-                                        <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="addOrEditModel.cron" style="width:66%">
-                                        <a href="javascript:;" style="margin-left:20px;" data-toggle="modal" data-target="#myModal_settingCron">不会写？点击这里</a>
-                                    </div>
-                                    <br>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon">任务描述：</span>
-                                        <input type="text" class="form-control" placeholder="xxx" name="jobDescription" v-model="addOrEditModel.jobDescription">
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">请求地址：</span>
-                                        <input type="text" class="form-control" placeholder="xxx" name="requestUrl" v-model="addOrEditModel.requestUrl">
-                                    </div>
-                                    <br>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn"
-                                                data-dismiss="modal">
-                                            关闭
-                                        </button>
-                                        <button type="button" v-on:click="addJob(this)" class="btn btn-primary">
-                                            提交
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!--新增弹出框结束-->
-            
             <!--分页开始-->
             <ul class="pager" v-if="totalCount>pageSize">
                 <li><a href="#" v-if="pageIndex>1" v-on:click="pageIndex=pageIndex-1;getJobs(jobStatus,pageIndex,pageSize)">上一页</a></li>
                 <li><a href="#" v-if="pageIndex<Math.ceil(totalCount/pageSize)" v-on:click="pageIndex=pageIndex+1;getJobs(jobStatus,pageIndex,pageSize)">下一页</a></li>
             </ul>
             <!--分页结束-->
-
         </div>
+
+        <!--新增任务弹出框开始  todo 把这个页面拆分到单独的页面-->
+        <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAdd">
+            <div class="modal-dialog" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabelAdd">
+                            {{modalLabelText}}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form class="" id="addJobForm" role="form">
+                                <div class="input-group">
+                                    <span class="input-group-addon">任务名称：</span>
+                                    <input type="text" class="form-control" placeholder="xxx" name="jobName" v-model="addOrEditModel.jobName">
+                                </div>
+                                <br>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">执行周期表达式：</span>
+                                    <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="addOrEditModel.cron" style="width:66%">
+                                    <a href="javascript:;" style="margin-left:20px;" data-toggle="modal" data-target="#myModal_settingCron">不会写？点击这里</a>
+                                </div>
+                                <br>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">任务描述：</span>
+                                    <input type="text" class="form-control" placeholder="xxx" name="jobDescription" v-model="addOrEditModel.jobDescription">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">请求地址：</span>
+                                    <input type="text" class="form-control" placeholder="xxx" name="requestUrl" v-model="addOrEditModel.requestUrl">
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn"
+                                data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="button" v-on:click="addJob(this)" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--新增弹出框结束-->
 
         <!--选择Cron结束-->
         <!--删除提示框开始-->
@@ -176,12 +174,12 @@
                         <h4 class="modal-title" id="myModalLabel_modifyJobCron">更改运行周期</h4>
                     </div>
                     <div class="modal-body">
+
                         <div class="input-group">
                             <span class="input-group-addon">执行周期表达式：</span>
                             <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="cronForModify">
-                            <a href="javascript:;" data-toggle="modal" data-target="#myModal_settingCron" style="margin-left:20px;">不会写？点击这里</a>
                         </div>
-
+                        <a href="javascript:;" data-toggle="modal" data-target="#myModal_settingCron" style="margin-left:20px;">不会写？点击这里</a>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn" data-dismiss="modal">关闭</button>
@@ -191,7 +189,6 @@
             </div>
         </div>
         <!--更改运行周期结束-->
-
         <!--加载动画开始-->
         <div class="spinner" style="display:none">
             <div class="cube1"></div>
