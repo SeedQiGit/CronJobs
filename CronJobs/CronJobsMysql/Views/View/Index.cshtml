@@ -51,7 +51,7 @@
                     </tr>
                 </thead>
                 <tbody id="jobListTbody">
-                    <tr v-for="(job,index) in jobs" data-jobId="job.Id">
+                    <tr v-for="(job,index) in jobs" :data-jobId="job.id">
                         @*<td v-for="(val,key) in job" v-bind:name="key">{{val}}</td>*@
                         <td>
                             {{job.id}}
@@ -62,7 +62,7 @@
                         <td>
                             {{job.description}}
                         </td>
-                        <td v-bind:name="job.cronExpress">
+                        <td name="cronExpress">
                             {{job.cronExpress}}
                         </td>
                         <td>
@@ -72,12 +72,12 @@
                             {{job.requestUrl}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default" v-show="job.jobState==2"   v-on:click="runJob(job.Id)">启动任务</button>
-                            <button type="button" class="btn btn-default" v-show="job.jobState==1"  v-on:click="pauseJob(job.Id)">
+                            <button type="button" class="btn btn-default" v-show="job.jobState==2"   v-on:click="jobState(job.id,1)">启动任务</button>
+                            <button type="button" class="btn btn-default" v-show="job.jobState==1"  v-on:click="jobState(job.id,2)">
                                 暂停任务
                             </button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.Id;">更改运行周期</button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.Id">删除任务</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_modifyJobCron" v-on:click="excuteJobId=job.id;">更改运行周期</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_delete" v-on:click="excuteJobId=job.id">删除任务</button>
                         </td>
                     </tr>
                 </tbody>
@@ -110,10 +110,12 @@
                                 </div>
                                 <br>
 
-                                <div class="input-group">
+                                <div class="input-group"  >
                                     <span class="input-group-addon">执行周期表达式：</span>
                                     <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="addOrEditModel.cron" style="width:66%">
-                                    <a href="javascript:;" style="margin-left:20px;" data-toggle="modal" data-target="#myModal_settingCron">不会写？点击这里</a>
+                                    <div  style="display: flex;align-items: center;  justify-content: center;height:100%;height: 34px; " >
+                                        <a href="http://cron.qqe2.com/" target="_blank">不会写？点击这里</a>
+                                    </div>
                                 </div>
                                 <br>
 
@@ -179,7 +181,9 @@
                             <span class="input-group-addon">执行周期表达式：</span>
                             <input type="text" class="form-control" placeholder="xxx" name="cron" v-model="cronForModify">
                         </div>
-                        <a href="javascript:;" data-toggle="modal" data-target="#myModal_settingCron" style="margin-left:20px;">不会写？点击这里</a>
+                        <div style="display: flex;align-items: center;  justify-content: center;height:100%;height: 34px; ">
+                            <a href="http://cron.qqe2.com/" target="_blank">不会写？点击这里</a>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn" data-dismiss="modal">关闭</button>
@@ -215,22 +219,19 @@
                 totalCount: 0,
                 cronForModify: '',
                 excuteJobId: 0,
-                cronCheck: true,
                 simpleCheck: false,
                 nav_tabs: [
                     { tabName: "全部任务列表", tabStatus: 0 },
                     { tabName: "执行任务列表", tabStatus: 1 },
                     { tabName: "暂停任务列表", tabStatus: 2 }
                 ],
+                userId:11,
                 addOrEditModel: {
                     jobName: '',
                     cron: '',
                     requestUrl: '',
                     jobDescription: '',
-                    cronDescription: '',
-                    cycle: '',
-                    repeatCount: ''
-
+                    cronDescription: ''
                 }
             },
 
@@ -244,61 +245,80 @@
                     getJobList.bind(this)(jobStatus, pageIndex, pageSize);
                 },
 
-                addJob: function (event) {
-                    var triggerType = '';
-                    var cronJob = {};
-                    var simpleJob = {};
-                    if (this.cronCheck) {
-                        triggerType = 'JobCronTrigger';
-                        cronJob.Cron = this.addOrEditModel.cron;
-
-                    } else {
-                        triggerType = 'JobSimpleTrigger';
-                        simpleJob.Cycle = this.addOrEditModel.cycle;
-                        simpleJob.RepeatCount = this.addOrEditModel.repeatCount;
-                    }
-                    var requestData = { JobName: this.addOrEditModel.jobName, TriggerType: triggerType, JobDescription: this.addOrEditModel.jobDescription, RequestUrl: this.addOrEditModel.requestUrl, CronJob: cronJob, SimpleJob: simpleJob };
+                addJob: function () {
+                    var request = {UserId: this.userId,  name:this.addOrEditModel.jobName,Description:this.addOrEditModel.jobDescription,CronExpress:this.addOrEditModel.cron, RequestUrl: this.addOrEditModel.requestUrl };
                     $.ajax({
-                        url: '/JobManager/AddJob',
-                        type: 'POST',
-                        data: requestData,
-                        success: function (data) {
-                            $('#myModal_add').modal('hide');
-                            $('#nav_jobStatusNav li[data-jobStatus=-1]').click();
+                        type: "POST",
+                        contentType: "application/json",
+                        url: hostUrl + '/api/CronJob/CronJobAdd',
+                        data: JSON.stringify(request),
+                        //返回数据类型
+                        dataType: "json",
+                        success: function () {
+                            //这里也要清空表单吧
+                            $('#modalAdd').modal('hide');
+                            //可以考虑直接推入数组，这样实时展示出来也不错
+                            $('#nav_jobStatusNav li[data-jobStatus=0]').click();
                         }
                     });
                 },
-                //运行任务
-                runJob: function (jobId) {
-                    $.post('/JobManager/RunJob', { jobId: jobId }, function (data) {
-                        operateElement(jobId);
-                        $('#nav_jobStatusNav li[data-jobStatus=-2]').click();
+
+                //修改任务状态 
+                jobState: function (jobId,state) {
+                    var jobStatus =this.jobStatus;
+                    var request = {UserId: this.userId,  Id:jobId ,JobState:state };
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        url: hostUrl + '/api/CronJob/CronJobState',
+                        data: JSON.stringify(request),
+                        //返回数据类型
+                        dataType: "json",
+                        success: function () {
+                            //这里也要清空表单吧
+                            $('#modalAdd').modal('hide');
+                            //可以考虑改数据状态，而不是这么刷新，刷新体验太差了。
+                            //刷新当前的菜单栏目
+                            $('#nav_jobStatusNav li[data-jobStatus=' + jobStatus + ']').click();
+                        }
                     });
                 },
 
-                //暂停任务
-                pauseJob: function (jobId) {
-                    $.post('/JobManager/PauseJob', { jobId: jobId }, function (data) {
-                        operateElement(jobId);
-                        $('#nav_jobStatusNav li[data-jobStatus=1]').click();
-                    });
-                },
-   
                 //删除任务
                 deleteJob: function (jobId) {
-                    $.post('api/CronJob/CronJobDelete', { Id: jobId }, function (data) {
-                        $('#myModal_delete').modal('hide');
-                        operateElement(jobId);
-                        $('#nav_jobStatusNav li[data-jobStatus=5]').click();
+                    //var jobStatus =this.jobStatus;
+                    var request = {UserId: this.userId,  Id:jobId };
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        url: hostUrl + '/api/CronJob/CronJobDelete',
+                        data: JSON.stringify(request),
+                        //返回数据类型
+                        dataType: "json",
+                        success: function () {
+                            $('#myModal_delete').modal('hide');
+                            $('#jobListTbody tr[data-jobId=' + jobId + ']').remove();
+                            //刷新当前的菜单栏目
+                            //$('#nav_jobStatusNav li[data-jobStatus=' + jobStatus + ']').click();
+                        }
                     });
                 },
 
                 //修改任务执行周期
                 modifyJobCron: function (jobId, cron) {
-                    $.post('api/CronJob/ModifyCronExpress', { jobId: jobId, cron: cron }, function (data) {
-                        $('#jobListTbody tr td[name=cronExpress]').text(cron);
-
-                        $('#myModal_modifyJobCron').modal('hide');
+                    var request = {UserId: this.userId,  Id:jobId ,CronExpress:cron};
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        url: hostUrl + '/api/CronJob/ModifyCronExpress',
+                        data: JSON.stringify(request),
+                        //返回数据类型
+                        dataType: "json",
+                        success: function () {
+                            //这里我直接修改vue模型的数据是不是就能改变展示的cron
+                            $('#jobListTbody tr[data-jobId=' + jobId + '] td[name=cronExpress]').text(cron);
+                            $('#myModal_modifyJobCron').modal('hide');
+                        }
                     });
                 }
             }
@@ -328,10 +348,6 @@
                 $('.spinner').hide();
             }
         });
-    };
-    //操作dom元素
-    function operateElement(jobId) {
-        $('#jobListTbody tr[data-jobId=' + jobId + ']').remove();
     };
 
 </script>
