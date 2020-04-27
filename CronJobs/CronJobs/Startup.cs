@@ -51,14 +51,14 @@ namespace CronJobs
             services.AddSingleton(config);
             services.AddScoped<IMapper, Mapper>();
 
-            services.AddHostedService<QuartzService>();
+            //services.AddHostedService<QuartzService>();
 
-            var schedulerFactory = new StdSchedulerFactory();
-            var scheduler = schedulerFactory.GetScheduler().Result;
-            //scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
-            scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
-            scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
-            scheduler.Start();
+            //var schedulerFactory = new StdSchedulerFactory();
+            //var scheduler = schedulerFactory.GetScheduler().Result;
+            ////scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener(), GroupMatcher<TriggerKey>.AnyGroup());
+            //scheduler.ListenerManager.AddJobListener(new JobListener(), GroupMatcher<JobKey>.AnyGroup());
+            //scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
+            //scheduler.Start();
 
 
             services.AddControllers()
