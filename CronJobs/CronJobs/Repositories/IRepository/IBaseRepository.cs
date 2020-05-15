@@ -9,6 +9,11 @@ namespace CronJobs.Repositories.IRepository
 {
     public interface IBaseRepository<T> where T: IMongoDbEntity
     {
+        /// <summary>
+        /// 文档
+        /// </summary>
+        IMongoCollection<T> Context{ get; set; }
+
         #region 查询方法
 
         /// <summary>

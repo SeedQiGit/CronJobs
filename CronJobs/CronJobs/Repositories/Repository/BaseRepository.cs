@@ -14,7 +14,7 @@ namespace CronJobs.Repositories.Repository
         /// <summary>
         /// 文档
         /// </summary>
-        protected IMongoCollection<T> Context;
+        public IMongoCollection<T> Context{ get; set; }
 
         /// <summary>
         /// 数据库
