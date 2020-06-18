@@ -8,7 +8,8 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using CronJobs.Data.Enum; 
+using CronJobs.Data.Enum;
+using System.Linq;
 
 namespace CronJobs.Services.Implementations
 {
@@ -37,6 +38,12 @@ namespace CronJobs.Services.Implementations
             {
                 filter=filter&filterBuilder.Eq("JobState",request.JobState);
             }
+
+            if (request.CreateTime != null && request.CreateTime.Count == 2)
+            {
+                filter = filter & filterBuilder.Gte("CreateTime", request.CreateTime.First()) & filterBuilder.Lte("CreateTime", request.CreateTime.Last());
+            }
+
 
             var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
 
