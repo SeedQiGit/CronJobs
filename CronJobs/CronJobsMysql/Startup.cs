@@ -55,6 +55,7 @@ namespace CronJobsMysql
             #endregion
 
             #region MVC
+
             //AddControllersWithViews 是mvc项目使用  api可以直接AddControllers
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
@@ -81,10 +82,20 @@ namespace CronJobsMysql
                     };
                 });
 
-         
+
             services.AddHttpClient();
 
             services.AddHttpContextAccessor();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        //如果把下面的也允许就会报错
+                        //.AllowCredentials()
+                        );
+            });
 
             #endregion
 
@@ -98,7 +109,7 @@ namespace CronJobsMysql
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
 
             app.UseAuthorization();
