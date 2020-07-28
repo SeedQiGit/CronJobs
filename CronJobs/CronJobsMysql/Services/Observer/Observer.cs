@@ -13,8 +13,6 @@ namespace CronJobsMysql.Services.Observer
           
         }
 
-       
-
         public override void SendMail(JobExcutedCallBackModel schedulerExecutedCallBackModel)
         {
             ILogger logger = ServiceProviderExtension.ServiceProvider.GetRequiredService<ILogger<Observer>>();

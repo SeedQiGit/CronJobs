@@ -23,10 +23,21 @@ namespace CronJobsMysql.Services.Quartz
         public async Task Execute(IJobExecutionContext context)
         {
             ILogger logger = ServiceProviderExtension.ServiceProvider.GetRequiredService<ILogger<JobExecutor>>();
+           
             var client = ServiceProviderExtension.ServiceProvider.GetRequiredService<IHttpClientFactory>().CreateClient();
 
             var url=context.JobDetail.JobDataMap["requestUrl"].ToString();
-            
+
+            logger.LogInformation("IJobExecutionContext" + url);
+
+            //判断是否有BaseAddress 也就是http或者https
+            //https://    http://
+            url = url.Trim();
+            if (!url.StartsWith("http://")&& !url.StartsWith("https://"))
+            {
+                url = "http://" + url;
+            }
+      
             var result = await client.GetAsync(url);
             logger.LogInformation("请求"+url+"返回值"+JsonConvert.SerializeObject(result));
         }
