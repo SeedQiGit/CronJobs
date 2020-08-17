@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CronJobs.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CronJobController:BaseController
     {
         private readonly ICronJobService _cronJobService;
