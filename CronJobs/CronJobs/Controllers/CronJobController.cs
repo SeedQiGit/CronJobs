@@ -22,7 +22,7 @@ namespace CronJobs.Controllers
         }
 
         [HttpGet("CronJobList")]
-        [ProducesResponseType(typeof(BaseResponse<List<CronJob>>), 1)]
+        [ProducesResponseType(typeof(BasePageResponse<List<CronJob>>), 1)]
         public async Task<BaseResponse> CronJobList([FromQuery]CronJobListRequest request)
         {
             return await _cronJobService.CronJobList(request);

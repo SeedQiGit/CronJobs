@@ -4,6 +4,11 @@
         <name>CronJobs</name>
     </assembly>
     <members>
+        <member name="T:CronJobs.Controllers.CronJobController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:CronJobs.Data.Entity.CronJob">
             <summary>
             
@@ -94,9 +99,21 @@
              排序字段
             </summary>
         </member>
+        <member name="P:CronJobs.Data.Request.CronJobListRequest.CreateTime">
+            <summary>
+            写入时间  为空不筛选
+            格式：yyyy-MM-dd HH:mm:ss
+            ['2019-07-15 00:00:00','2019-07-15 23:59:59']
+            </summary>
+        </member>
         <member name="P:CronJobs.Data.Request.CronJobUpdateRequest.CronJob">
             <summary>
             CronJob模型  直接用替换
+            </summary>
+        </member>
+        <member name="P:CronJobs.Repositories.IRepository.IBaseRepository`1.Context">
+            <summary>
+            文档
             </summary>
         </member>
         <member name="M:CronJobs.Repositories.IRepository.IBaseRepository`1.GetListAsync(System.Int32,System.Int32)">
@@ -149,7 +166,7 @@
             <param name="update">执行更新</param>
             <returns></returns>
         </member>
-        <member name="F:CronJobs.Repositories.Repository.BaseRepository`1.Context">
+        <member name="P:CronJobs.Repositories.Repository.BaseRepository`1.Context">
             <summary>
             文档
             </summary>
