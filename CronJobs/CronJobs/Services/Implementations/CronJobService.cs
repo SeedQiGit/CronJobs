@@ -48,7 +48,8 @@ namespace CronJobs.Services.Implementations
             var sort=request.OrderBy==0 ? Builders<CronJob>.Sort.Ascending(request.OrderByField) : Builders<CronJob>.Sort.Descending(request.OrderByField);
 
             var list = await _cronJobRepository.GetListAsync(filter,request.Skip,request.PageSize,sort);
-            long count = await _cronJobRepository.Context.CountDocumentsAsync(filter);
+            //最多数到300就不往下继续数了。
+            long count = await _cronJobRepository.Context.CountDocumentsAsync(filter, new CountOptions { Limit = 300 });
 
             BasePageResponse<CronJob> res = new BasePageResponse<CronJob>();
             res.DataList = list;
